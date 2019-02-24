@@ -1,0 +1,14 @@
+<h6 mat-dialog-title>Dodaj nowy kontakt</h6>
+<mat-dialog-content>
+  <app-form-contact #formContact></app-form-contact>
+<div class="content-form">
+  <mat-dialog-actions>
+    <div class="row">
+      <div class="col">
+        <button mat-raised-button mat-dialog-close>Anuluj</button>
+        <button (click)="createContact(formContact.form.value.alias)" mat-raised-button color = "primary" [disabled] = "formContact.form.invalid" mat-dialog-close>Dodaj</button>
+      </div>
+    </div>
+  </mat-dialog-actions>
+</div>
+

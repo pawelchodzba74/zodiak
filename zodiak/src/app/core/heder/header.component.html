@@ -1,0 +1,23 @@
+
+
+<mat-toolbar *ngIf = "viewToolbar"  color="primary" [ngClass]="{'shrink-toolbar': shrinkToolbar}">
+	<mat-toolbar-row>
+    <!-- <button fxFlexFill cdkScrollable  mat-button  >Menu</button> -->
+
+
+  <div class = "position-relative float-right">
+  <div *ngIf = "isLoged; then Out else log"></div>
+    <ng-template #Out>
+        <button mat-button (click)='logOut()'>Wyloguj</button><span class = "ml-5 log" *ngIf ="logName">Zalgowany: {{logName}}</span>
+    </ng-template>
+    <ng-template #log>
+        <button mat-button (click)='openDialog()'>Zaloguj</button>
+    </ng-template>
+  </div>
+  <!-- <button mat-button  [routerLink] = "['/login']">Open dialog</button> -->
+
+
+
+
+	</mat-toolbar-row>
+</mat-toolbar>

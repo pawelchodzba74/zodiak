@@ -1,0 +1,67 @@
+
+<form [formGroup] = "form">
+  <div class= "row" >
+    <div class="col-sm-4">
+      <mat-form-field>
+        <input matInput formControlName="alias" placeholder="pseudonim">
+        <mat-error *ngIf="form.get('alias').hasError('required')">pole jest wymagane</mat-error>
+        <mat-error *ngIf = "form.get('alias').hasError('maxlength')">pole nie może mieć więcej niż 24 znaki</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-4">
+      <mat-form-field>
+        <input matInput formControlName="first_name" placeholder="imię">
+        <mat-error *ngIf="form.get('first_name').hasError('required')">pole jest wymagane</mat-error>
+        <mat-error *ngIf = "!form.get('first_name').hasError('required')">pole nie może mieć więcej niż 24 znaki</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row" >
+    <div class="col-sm-4">
+      <mat-form-field>
+        <input matInput formControlName="last_name" placeholder="nazwisko">
+        <mat-error *ngIf = "form.get('last_name').hasError('required')">pole jest wymagane</mat-error>
+        <mat-error *ngIf = "!form.get('last_name').hasError('required')">pole nie może mieć więcej niż 24 znaki</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-4">
+      <mat-form-field>
+        <input matInput formControlName="email" placeholder="adres email">
+        <mat-error *ngIf = "form.get('email').hasError('required')">pole jest wymagane</mat-error>
+        <mat-error *ngIf = "form.get('email').hasError('email')">email musi mieć odpowiedni format</mat-error>
+        <mat-error *ngIf = "form.get('email').hasError('maxlength')">pole nie może mieć więcej niż 32 znaki</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <mat-form-field>
+        <input matInput formControlName="telephon" placeholder="numer telefonu">
+        <mat-error *ngIf="form.get('telephon').hasError('pattern')">numer telefonu musi mieć 9 cyfr</mat-error>
+        <mat-error *ngIf="form.get('telephon').hasError('required')">pole jest wymagane</mat-error>
+
+      </mat-form-field>
+    </div>
+    <div class="col-sm-4">
+      <mat-form-field>
+          <mat-select formControlName="sex" [(value)]="selected">
+            <mat-option  value="k">Kobieta</mat-option>
+            <mat-option  value="m">Mężczyzna</mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('sex').hasError('required')">pole jest wymagane</mat-error>
+        </mat-form-field>
+<!-- /////////////////////////// date ////////////////////////////// -->
+
+        <mat-form-field>
+          <input  matInput [matDatepicker]="picker1" placeholder="Angular forms" [formControl]="date" formControlName="dateOd">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+
+        <input matInput  type="time" atp-time-picker  theme="dark" formControlName="hours" >
+        <mat-checkbox class="example-margin" (click)="disabledTime()" formControlName="isAllDay">Wynajmuję na cały dzień</mat-checkbox>
+      </div>
+  </div>
+</form>
+
