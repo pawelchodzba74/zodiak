@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,6 +18,9 @@ import { LoginModule } from './login/login.module';
 import { AuthService } from './auth/auth.service';
 import { LayoutService } from './shared/services/layout.service';
 import { AmazingTimePickerModule } from 'amazing-time-picker';
+import '@progress/kendo-angular-intl/locales/pl/all';
+import {  } from '@angular/core';
+// import { BehaviorSubject } from 'rxjs';
 
 
 @NgModule({
@@ -37,12 +40,24 @@ import { AmazingTimePickerModule } from 'amazing-time-picker';
     LoginModule,
     DeviceDetectorModule.forRoot(),
     AmazingTimePickerModule
+    // SchedulerModule
 
 
   ],
   providers: [
-    ContactListService, SpinerComponent, AuthService, LayoutService
+    ContactListService,
+    SpinerComponent,
+    AuthService,
+    LayoutService,
+    {provide: LOCALE_ID, useValue: 'pl'}
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+
+
+
+
+
+
+}

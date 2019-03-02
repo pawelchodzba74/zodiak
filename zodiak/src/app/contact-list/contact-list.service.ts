@@ -53,7 +53,11 @@ export class ContactListService {
         catchError(this.handleError)
       );
   }
+  // tslint:disable-next-line:max-line-length
   upDataPerson(person: Person): Observable<object> {
+/////////////////////////////////////////////////////// set data time //////////////////////
+    // person.dateDo = person.dateDo.setHours(person.hoursDo.split(':')[0], person.hoursDo.split(':')[1]) ;
+    ///////////////////////////////////////////////////////////////////////////
     const phpUrl = 'http://localhost/contact-new/back-end/update.php';
     // const prefixRoute = (this.detectBrowser() === 'chrome') ? '../../../' : '' ;
     // const phpUrl = prefixRoute + 'back-end/update.php';
@@ -94,5 +98,44 @@ export class ContactListService {
   }
   detectBrowser(): string  {
     return this.divaceDetector.browser;
+  }
+  ///////////////////////////////////////////// zodiak service///////////////
+
+  getEvents(nrRoom: number) {
+    return new Promise((resolve, reject) => {
+      let EVENTS = this.mockEvents();
+     let eResult = [];
+      eResult = EVENTS.filter((e) => +e['nrRoom'] === nrRoom);
+       eResult.length ? resolve(eResult) : reject();
+    });
+  }
+  mockEvents() {
+
+      return[
+      { id: 1,
+    start: new Date('2019-03-02T09:00:00Z'),
+    end: new Date('2019-03-02T11:30:00Z'),
+    title: '9am UTC',
+    isAllDay: false,
+    nrRoom: '1'
+    },
+    {
+    id: 2,
+    start: new Date('2018-10-20T09:00:00Z'),
+    end: new Date('2018-10-21T01:30:00Z'),
+    title: '9am UTC',
+    isAllDay: false,
+    nrRoom: '2'
+    },
+    {
+    id: 3,
+    start: new Date('2018-10-20T09:00:00Z'),
+    end: new Date('2018-10-21T01:30:00Z'),
+    title: '9am UTC',
+    isAllDay: false,
+    nrRoom: '3'
+    },
+
+    ] ;
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit, ViewContainerRef  } from '@angular/core';
 import { ContactListService } from '../contact-list.service';
 import { ActivatedRoute } from '@angular/router';
-import { FormContactComponent } from '../form-contact/form-contact.component';
+import { FormContactComponent } from '../../shared/form-contact/form-contact.component';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { SpinerComponent } from '../../shared/spiner/spiner.component';

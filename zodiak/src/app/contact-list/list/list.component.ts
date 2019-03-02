@@ -6,6 +6,7 @@ import { DialogDeleteComponent } from '../../shared/dialog-delete/dialog-delete.
 import { ToastrService } from 'ngx-toastr';
 import { Person } from '../models/person';
 import { SpinerComponent } from '../../shared/spiner/spiner.component';
+import { AdminSheduleComponent } from '../admin-shedule/admin-shedule.component';
 
 @Component({
   selector: 'app-list',
@@ -17,6 +18,7 @@ export class ListComponent implements OnInit {
 displayedColumns: string[] = ['Nazwa', 'Sala', 'Data', 'Email', 'Telephon', 'Description', 'Admin', 'details', 'edit', 'delete'];
 dataSource: MatTableDataSource<Person>;
 error: string;
+rooms: string[] = ['1', '2', '3', '4', '5', '6'];
 @ViewChild(MatPaginator) paginator: MatPaginator;
 @ViewChild(MatSort) sort: MatSort;
 @ViewChild('spiner', {read: ViewContainerRef}) spiner: ViewContainerRef;
@@ -85,5 +87,14 @@ constructor(
   openNewContactModal(): void {
      const dialogRef = this.dialog.open(NewContactComponent);
   }
+  openSchedule(nrRoom: number) {
+    const schedule = this.dialog.open(AdminSheduleComponent, {
+      data: {nrRoom: nrRoom},
+      width: '50%',
+    });
+    schedule.afterOpen().subscribe(() => {
 
+
+    });
+  }
 }

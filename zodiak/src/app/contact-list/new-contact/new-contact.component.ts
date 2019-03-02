@@ -1,5 +1,5 @@
 import { Component , ViewChild} from '@angular/core';
-import { FormContactComponent } from './../form-contact/form-contact.component';
+import { FormContactComponent } from './../../shared/form-contact/form-contact.component';
 import { ContactListService } from './../contact-list.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -31,7 +31,5 @@ export class NewContactComponent  {
     this.contactListService.reLoadTab();
 
   }
-  test() {
-    return true;
-  }
+
 }

@@ -1,0 +1,20 @@
+<kendo-scheduler #scheduler
+  [kendoSchedulerBinding]="events"
+  [selectedDate]="selectedDate"
+  style="height: 400px; width: 100%">
+<kendo-scheduler-day-view>
+</kendo-scheduler-day-view>
+<kendo-scheduler-week-view>
+  </kendo-scheduler-week-view>
+
+  <kendo-scheduler-messages
+                today="data"
+                allDay="cały"
+                dayViewTitle="dzień"
+                weekViewTitle="tydzień"
+                monthViewTitle="smiesiąc"
+                showWorkDay="pokaż zajęte "
+                showFullDay="pokaż wszystko"
+            >
+            </kendo-scheduler-messages>
+</kendo-scheduler>

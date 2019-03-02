@@ -27,10 +27,10 @@ export class FormContactComponent implements OnInit {
   ngOnInit() {
     const Value = this.setValueForm(false);
     this.buildForm(Value);
-  }
+   }
 
   disabledTime() {
-    // this.form.controls['dateOd'].disable();
+
     this.checked =  !this.checked;
     this.checked ? this.form.controls.hours.disable() : this.form.controls.hours.enable();
 
@@ -45,8 +45,11 @@ buildForm(Value): void {
     email: [Value.email, { validators: [ Validators.required, Validators.maxLength(32), Validators.email  ]}],
     telephon: [Value.telephon, { validators: [ Validators.required, Validators.maxLength(12), Validators.pattern('[0-9]{9}') ]}],
     sex: [Value.sex, Validators.required],
-    dateOd: [ ],
-    hours: [ '10:00' ],
+    photo: null,
+    dateOd: [],
+    hoursOd: [ '10:00' ],
+    dateDo: [],
+    hoursDo: [ '11:00' ],
     isAllDay: []
 
 
@@ -60,7 +63,11 @@ buildForm(Value): void {
         last_name: Person.last_name,
         email: Person.email,
         telephon: Person.telephon,
-        sex: Person.sex
+        sex: Person.sex,
+        dateOd: Person.dateOd,
+        hoursOd: Person.hoursOd,
+        dateDo: Person.dateDo,
+        hoursDo: Person.dateDo
 
       };
     } else {
@@ -70,7 +77,11 @@ buildForm(Value): void {
         last_name: '',
         email: '',
         telephon: '',
-        sex: 'k'
+        sex: 'k',
+        dateOd: '',
+        hoursOd: '',
+        dateDo: '',
+        hoursDo: ''
 
       };
     }

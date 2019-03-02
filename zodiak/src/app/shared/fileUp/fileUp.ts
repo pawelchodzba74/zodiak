@@ -1,7 +1,7 @@
 
 import { ToastrService } from 'ngx-toastr';
 import { Injectable } from '@angular/core';
-import { FormContactComponent } from '../../contact-list/form-contact/form-contact.component';
+import { FormContactComponent } from '../../shared/form-contact/form-contact.component';
 import { FileAlert } from '../../contact-list/models/fileAlert';
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class FileUp {
   };
   errors: FileAlert[] = [];
 
-  dataUrl(file: File): void {//console.log(file);
+  dataUrl(file: File): void {
     this.reader.readAsDataURL(file);
     this.setFile(file);
     this.errorsClear();

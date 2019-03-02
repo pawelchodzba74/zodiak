@@ -6,6 +6,7 @@ import { NgZone } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { LoginComponent } from '../../login/login.component';
 import { AuthService } from '../../auth/auth.service';
+import { ScheduleComponent } from '../../shared/schedule/schedule.component';
 
 
 
@@ -25,7 +26,8 @@ export class HeaderComponent implements OnInit  {
     private scrollDispatcher: ScrollDispatcher,
     private ngZone: NgZone,
     public dialog: MatDialog,
-    private authService: AuthService
+    private authService: AuthService,
+    // private scheduleComponent: ScheduleComponent
 
   ) { }
 
@@ -65,4 +67,5 @@ export class HeaderComponent implements OnInit  {
   getNameLogin() {
     this.logName =  this.authService.getLogName();
   }
+
 }
