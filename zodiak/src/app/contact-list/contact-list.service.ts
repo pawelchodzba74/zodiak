@@ -26,27 +26,27 @@ export class ContactListService {
     ) {}
 
   addPerson(person: Person): Observable<any> {
-    const phpUrl = 'http://localhost/contact-new/back-end/create.php';
-    // const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
-    // const phpUrl = prefixRoute + 'back-end/create.php';
+    // const phpUrl = 'http://localhost/contact-new/back-end/create.php';
+    const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
+    const phpUrl = prefixRoute + 'back-end/create.php';
     return  this.http.post(phpUrl, person)
     .pipe(
       catchError(this.handleError)
     );
   }
   read(): Observable<Person[]> {
-    const phpUrl = 'http://localhost/contact-new/back-end/read.php';
-    // const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
-    // const phpUrl = prefixRoute + 'back-end/read.php';
+    // const phpUrl = 'http://localhost/contact-new/back-end/read.php';
+    const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
+    const phpUrl = prefixRoute + 'back-end/read.php';
     return this.http.get<Person[]>(phpUrl)
       .pipe(
         retry(3),
         catchError(this.handleError));
   }
   getPerson(id: string): Observable<any> {
-    const phpUrl = 'http://localhost/contact-new/back-end/read_one.php?id=' + id;
-    // const prefixRoute = (this.detectBrowser() === 'chrome') ? '../../../' : '' ;
-    // const phpUrl = prefixRoute + 'back-end/read_one.php?id=' + id;
+    // const phpUrl = 'http://localhost/contact-new/back-end/read_one.php?id=' + id;
+    const prefixRoute = (this.detectBrowser() === 'chrome') ? '../../../' : '' ;
+    const phpUrl = prefixRoute + 'back-end/read_one.php?id=' + id;
     return this.http.get(phpUrl)
       .pipe(
         retry(3),
@@ -58,18 +58,18 @@ export class ContactListService {
 /////////////////////////////////////////////////////// set data time //////////////////////
     // person.dateDo = person.dateDo.setHours(person.hoursDo.split(':')[0], person.hoursDo.split(':')[1]) ;
     ///////////////////////////////////////////////////////////////////////////
-    const phpUrl = 'http://localhost/contact-new/back-end/update.php';
-    // const prefixRoute = (this.detectBrowser() === 'chrome') ? '../../../' : '' ;
-    // const phpUrl = prefixRoute + 'back-end/update.php';
+    // const phpUrl = 'http://localhost/contact-new/back-end/update.php';
+    const prefixRoute = (this.detectBrowser() === 'chrome') ? '../../../' : '' ;
+    const phpUrl = prefixRoute + 'back-end/update.php';
     return this.http.post(phpUrl, person, this.httpOptions)
       .pipe(
         catchError(this.handleError)
       );
 }
   deletePerson(person: Person): Observable<object> {
-    const phpUrl = 'http://localhost/contact-new/back-end/delete.php';
-    // const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
-    // const phpUrl = prefixRoute + 'back-end/delete.php';
+    // const phpUrl = 'http://localhost/contact-new/back-end/delete.php';
+    const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
+    const phpUrl = prefixRoute + 'back-end/delete.php';
     return this.http.post(phpUrl, {id: person.id}, this.httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -101,40 +101,183 @@ export class ContactListService {
   }
   ///////////////////////////////////////////// zodiak service///////////////
 
-  getEvents(nrRoom: number) {
+  getEvents(nrRoom: number) {//this.fabrickMock();
     return new Promise((resolve, reject) => {
+      // let EVENTS = this.fabrickMock();
       let EVENTS = this.mockEvents();
      let eResult = [];
       eResult = EVENTS.filter((e) => +e['nrRoom'] === nrRoom);
        eResult.length ? resolve(eResult) : reject();
     });
   }
-  mockEvents() {
+
+  fabrickMock() {
+
+  const date = new Date();
+  const title = 'treć xxx ';
+  const isAllDay = false;
+  const nrRoom = [1,2,3,4,6,6];
+
+  const maineObj = [];
+  const one = {
+    start: '',
+    end: '',
+    title: '',
+    isAllDay: '',
+    nrRoom: ''
+  };
+
+  for (let i = 0; i <= 10; i++) {
+    maineObj.push(one);
+  }
+  console.log(maineObj);
+return maineObj;
+
+  }
+
+
+  mockEvents() {this.fabrickMock();
 
       return[
       { id: 1,
-    start: new Date('2019-03-02T09:00:00Z'),
-    end: new Date('2019-03-02T11:30:00Z'),
-    title: '9am UTC',
-    isAllDay: false,
+    start: new Date('2019-03-12T09:00:00'),
+    end: new Date('2019-03-12T12:30:00'),
+    title: '11 NOVA - pisać pierwsze nazwę firmy wynajmującej będzie wtety dobrze widać w tygodniowym ujęciu',
+    isAllDay: true,
     nrRoom: '1'
     },
     {
     id: 2,
-    start: new Date('2018-10-20T09:00:00Z'),
-    end: new Date('2018-10-21T01:30:00Z'),
-    title: '9am UTC',
+    start: new Date('2019-03-12T11:00:00'),
+    end: new Date('2019-03-12T12:30:00'),
+    title: '2222222222222',
     isAllDay: false,
-    nrRoom: '2'
+    nrRoom: '1'
     },
     {
     id: 3,
-    start: new Date('2018-10-20T09:00:00Z'),
-    end: new Date('2018-10-21T01:30:00Z'),
-    title: '9am UTC',
+    start: new Date('2019-03-12T09:00:00'),
+    end: new Date('2019-03-12T11:30:00'),
+    title: '333333333333333333333',
     isAllDay: false,
-    nrRoom: '3'
+    nrRoom: '1'
     },
+    { id: 1,
+      start: new Date('2019-03-12T09:00:00'),
+      end: new Date('2019-03-12T11:30:00'),
+      title: '11 NOVA - pisać pierwsze nazwę firmy wynajmującej będzie wtety dobrze widać w tygodniowym ujęciu',
+      isAllDay: true,
+      nrRoom: '2'
+      },
+      {
+      id: 2,
+      start: new Date('2019-03-12T11:00:00'),
+      end: new Date('2019-03-12T12:30:00'),
+      title: '2222222222222',
+      isAllDay: false,
+      nrRoom: '2'
+      },
+      {
+      id: 3,
+      start: new Date('2019-03-12T09:00:00'),
+      end: new Date('2019-03-12T11:30:00'),
+      title: '333333333333333333333',
+      isAllDay: false,
+      nrRoom: '2'
+      },
+      { id: 1,
+        start: new Date('2019-03-12T09:00:00'),
+        end: new Date('2019-03-12T11:30:00'),
+        title: '11 NOVA - pisać pierwsze nazwę firmy wynajmującej będzie wtety dobrze widać w tygodniowym ujęciu',
+        isAllDay: true,
+        nrRoom: '3'
+        },
+        {
+        id: 2,
+        start: new Date('2019-03-12T11:00:00'),
+        end: new Date('2019-03-12T12:30:00'),
+        title: '2222222222222',
+        isAllDay: false,
+        nrRoom: '3'
+        },
+        {
+        id: 3,
+        start: new Date('2019-03-12T09:00:00'),
+        end: new Date('2019-03-12T11:30:00'),
+        title: '333333333333333333333',
+        isAllDay: false,
+        nrRoom: '3'
+        },
+        { id: 1,
+          start: new Date('2019-03-12T09:00:00'),
+          end: new Date('2019-03-12T11:30:00'),
+          title: '11 NOVA - pisać pierwsze nazwę firmy wynajmującej będzie wtety dobrze widać w tygodniowym ujęciu',
+          isAllDay: true,
+          nrRoom: '4'
+          },
+          {
+          id: 2,
+          start: new Date('2019-03-12T11:00:00'),
+          end: new Date('2019-03-12T12:30:00'),
+          title: '2222222222222',
+          isAllDay: false,
+          nrRoom: '4'
+          },
+          {
+          id: 3,
+          start: new Date('2019-03-12T09:00:00'),
+          end: new Date('2019-03-12T11:30:00'),
+          title: '333333333333333333333',
+          isAllDay: false,
+          nrRoom: '4'
+          },
+          { id: 1,
+            start: new Date('2019-03-12T09:00:00'),
+            end: new Date('2019-03-12T11:30:00'),
+            title: '11 NOVA - pisać pierwsze nazwę firmy wynajmującej będzie wtety dobrze widać w tygodniowym ujęciu',
+            isAllDay: true,
+            nrRoom: '5'
+            },
+            {
+            id: 2,
+            start: new Date('2019-03-12T11:00:00'),
+            end: new Date('2019-03-12T12:30:00'),
+            title: '2222222222222',
+            isAllDay: false,
+            nrRoom: '5'
+            },
+            {
+            id: 3,
+            start: new Date('2019-03-12T09:00:00'),
+            end: new Date('2019-03-12T11:30:00'),
+            title: '333333333333333333333',
+            isAllDay: false,
+            nrRoom: '5'
+            },
+            { id: 1,
+              start: new Date('2019-03-12T09:00:00'),
+              end: new Date('2019-03-12T11:30:00'),
+              title: '11 NOVA - pisać pierwsze nazwę firmy wynajmującej będzie wtety dobrze widać w tygodniowym ujęciu',
+              isAllDay: true,
+              nrRoom: '6'
+              },
+              {
+              id: 2,
+              start: new Date('2019-03-12T11:00:00'),
+              end: new Date('2019-03-12T12:30:00'),
+              title: '2222222222222',
+              isAllDay: false,
+              nrRoom: '6'
+              },
+              {
+              id: 3,
+              start: new Date('2019-03-12T09:00:00'),
+              end: new Date('2019-03-12T11:30:00'),
+              title: '333333333333333333333',
+              isAllDay: false,
+              nrRoom: '6'
+              },
+
 
     ] ;
   }

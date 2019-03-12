@@ -85,15 +85,15 @@
     </mat-form-field>
   </div>
      <!-- add client -->
-    <div>
-      <button (click)="openNewContactModal()" mat-flat-button color="primary"  class="btn-block" id ="new-contact">Dodaj nowego klienta</button>
-    </div>
-      <button *ngFor = "let room of rooms; let i = index" mat-button (click)="openSchedule(i)">{{room}}</button>
-    <div>
+  <div>
+    <button (click)="openNewContactModal()" mat-flat-button color="primary"   id ="new-contact">Dodaj nowego klienta</button>
+  </div>
 
-    </div>
+  <div>
+    <button *ngFor = "let room of rooms; let i = index" (click)="openSchedule(i)" mat-flat-button color="primary" style= "width:10px">{{room}}</button>
+  </div>
      <!-- paginator -->
-  <mat-paginator [pageSizeOptions]="[10, 20, 30]"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[20, 40, 60]"></mat-paginator>
 </div>
 </div>
 <!-- <app-spiner></app-spiner> -->

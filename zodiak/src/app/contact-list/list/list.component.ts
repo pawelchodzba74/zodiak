@@ -88,13 +88,9 @@ constructor(
      const dialogRef = this.dialog.open(NewContactComponent);
   }
   openSchedule(nrRoom: number) {
-    const schedule = this.dialog.open(AdminSheduleComponent, {
-      data: {nrRoom: nrRoom},
+    this.dialog.open(AdminSheduleComponent, {
+      data: {nrRoom: nrRoom + 1},
       width: '50%',
-    });
-    schedule.afterOpen().subscribe(() => {
-
-
     });
   }
 }

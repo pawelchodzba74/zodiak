@@ -2,10 +2,8 @@ import { Component, OnInit, Input,  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,  FormControl} from '@angular/forms';
 import { MaterialModule } from '../../material/material.module';
 import { ViewContainerRef } from '@angular/core/src/linker/view_container_ref';
-import { AmazingTimePickerModule } from 'amazing-time-picker';
-
-
-
+import { StartEndEventComponent } from '../date/start-end-event/start-end-event.component';
+import { DateEventValid } from '../../shared/validators/date-event-valid';
 
 @Component({
   selector: 'app-form-contact',
@@ -17,9 +15,10 @@ export class FormContactComponent implements OnInit {
   selected;
   form: FormGroup;
 
-  date = new FormControl(new Date());
-  serializedDate = new FormControl((new Date()).toISOString());
-  checked = false;
+  // date = new FormControl(new Date());
+  // serializedDate = new FormControl((new Date()).toISOString());
+  // checked = false;
+  startEnd;
   constructor(
     private formBuilder: FormBuilder,
     ) {}
@@ -27,34 +26,27 @@ export class FormContactComponent implements OnInit {
   ngOnInit() {
     const Value = this.setValueForm(false);
     this.buildForm(Value);
-   }
+    this.form.addControl('startEnd', new FormControl('', Validators.required));
+    }
 
-  disabledTime() {
-
-    this.checked =  !this.checked;
-    this.checked ? this.form.controls.hours.disable() : this.form.controls.hours.enable();
-
-
+  setDateEvent(startEndDate): void {
+    this.form.get('startEnd').setValue(startEndDate);
+    this.form.get('startEnd').setValidators(DateEventValid.DateEvent);
 
   }
-buildForm(Value): void {
-  this.form = this.formBuilder.group({
-    alias: [Value.alias , { validators: [Validators.required, Validators.maxLength(24) ]}],
-    first_name: [Value.first_name, { validators: [ Validators.required, Validators.maxLength(24) ]}],
-    last_name: [Value.last_name, { validators: [ Validators.required, Validators.maxLength(24) ]}],
-    email: [Value.email, { validators: [ Validators.required, Validators.maxLength(32), Validators.email  ]}],
-    telephon: [Value.telephon, { validators: [ Validators.required, Validators.maxLength(12), Validators.pattern('[0-9]{9}') ]}],
-    sex: [Value.sex, Validators.required],
-    photo: null,
-    dateOd: [],
-    hoursOd: [ '10:00' ],
-    dateDo: [],
-    hoursDo: [ '11:00' ],
-    isAllDay: []
+  buildForm(Value): void {
+    this.form = this.formBuilder.group({
+      alias: [Value.alias , { validators: [Validators.required, Validators.maxLength(24) ]}],
+      first_name: [Value.first_name, { validators: [ Validators.required, Validators.maxLength(24) ]}],
+      last_name: [Value.last_name, { validators: [ Validators.required, Validators.maxLength(24) ]}],
+      email: [Value.email, { validators: [ Validators.required, Validators.maxLength(32), Validators.email  ]}],
+      telephon: [Value.telephon, { validators: [ Validators.required, Validators.maxLength(12), Validators.pattern('[0-9]{9}') ]}],
+      sex: [Value.sex, Validators.required],
+      photo: null
 
 
-  });
-}
+    });
+  }
   setValueForm(Person) {
     if (Person) {
       return{
@@ -63,12 +55,7 @@ buildForm(Value): void {
         last_name: Person.last_name,
         email: Person.email,
         telephon: Person.telephon,
-        sex: Person.sex,
-        dateOd: Person.dateOd,
-        hoursOd: Person.hoursOd,
-        dateDo: Person.dateDo,
-        hoursDo: Person.dateDo
-
+        sex: Person.sex
       };
     } else {
       return {
@@ -77,12 +64,7 @@ buildForm(Value): void {
         last_name: '',
         email: '',
         telephon: '',
-        sex: 'k',
-        dateOd: '',
-        hoursOd: '',
-        dateDo: '',
-        hoursDo: ''
-
+        sex: 'k'
       };
     }
   }

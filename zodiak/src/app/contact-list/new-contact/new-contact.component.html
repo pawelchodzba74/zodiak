@@ -1,14 +1,26 @@
 <h6 mat-dialog-title>Dodaj nowy kontakt</h6>
 <mat-dialog-content>
-  <app-form-contact #formContact></app-form-contact>
+  <app-form-contact  #formContact></app-form-contact>
+  <app-start-end-event #startEndEvent
+                      [minDayDefault]='false'
+                      [maxDayDefault]='365'
+
+                      (date) = "setStartEnd($event)"
+  ></app-start-end-event>
+   <!-- format date '[Numerick]'minDateDefault & maxDateDefault  -->
 <div class="content-form">
   <mat-dialog-actions>
     <div class="row">
       <div class="col">
         <button mat-raised-button mat-dialog-close>Anuluj</button>
         <button (click)="createContact(formContact.form.value.alias)" mat-raised-button color = "primary" [disabled] = "formContact.form.invalid" mat-dialog-close>Dodaj</button>
+
       </div>
     </div>
   </mat-dialog-actions>
 </div>
 
+ <!-- <pre>formulaż{{formContact.form.invalid | json }}</pre> -->
+ <pre>StartEnd{{formContact.form.get('startEnd').valid | json }}</pre>
+ <!-- <pre>{{formContact.form.get('startEnd').value.start == formContact.form.get('startEnd').value.end | json }}</pre> -->
+ <pre>startEnd obj{{formContact.form.get('startEnd').value | json }}</pre>

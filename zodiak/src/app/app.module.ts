@@ -19,7 +19,10 @@ import { AuthService } from './auth/auth.service';
 import { LayoutService } from './shared/services/layout.service';
 import { AmazingTimePickerModule } from 'amazing-time-picker';
 import '@progress/kendo-angular-intl/locales/pl/all';
-import {  } from '@angular/core';
+import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
+import { LabelModule } from '@progress/kendo-angular-label';
+import { ClientsPanelModule } from './clients-panel/clients-panel.module';
+
 // import { BehaviorSubject } from 'rxjs';
 
 
@@ -39,7 +42,10 @@ import {  } from '@angular/core';
     ScrollDispatchModule,
     LoginModule,
     DeviceDetectorModule.forRoot(),
-    AmazingTimePickerModule
+    AmazingTimePickerModule,
+    DateInputsModule,
+    LabelModule,
+    ClientsPanelModule
     // SchedulerModule
 
 

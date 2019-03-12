@@ -5,6 +5,7 @@ import { Route } from '@angular/router';
 import { ContactDetailsComponent } from './contact-list/contact-details/contact-details.component';
 import { EditContactComponent } from './contact-list/edit-contact/edit-contact.component';
 import { PhotoComponent } from './shared/photo/photo.component';
+import { WinMaineComponent } from './clients-panel/win-maine/win-maine.component';
 
 export const APP_ROUTES: Route[] = [
   { path: '', redirectTo: 'clients', pathMatch: 'full' },
@@ -12,7 +13,8 @@ export const APP_ROUTES: Route[] = [
       { path: 'details/:id', component: <any>ContactDetailsComponent},
       { path: 'edit/:id', component: <any>EditContactComponent},
   ]},
-  { path: 'clients/photo/:id', component: <any>PhotoComponent }
+  { path: 'clients/photo/:id', component: <any>PhotoComponent },
+  { path: 'schema', component: <any>WinMaineComponent }
   // { path: 'details/:id' , component: <any>ContactDetailsComponent }
 ];
 @NgModule({
