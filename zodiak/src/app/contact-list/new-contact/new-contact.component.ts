@@ -1,6 +1,6 @@
 import { Component , ViewChild} from '@angular/core';
 import { FormContactComponent } from './../../shared/form-contact/form-contact.component';
-import { ContactListService } from './../contact-list.service';
+import { AppService } from '../../app-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { StartEndEventComponent } from '../../shared/date/start-end-event/start-end-event.component';
 
@@ -14,7 +14,7 @@ export class NewContactComponent  {
   @ViewChild('formContact') formContact: FormContactComponent;
   @ViewChild('startEndEvent') startEndEvent;
   constructor(
-    private contactListService: ContactListService ,
+    private appService: AppService ,
     private toastr: ToastrService
   ) { }
 
@@ -25,7 +25,7 @@ export class NewContactComponent  {
   createContact(alias: string): void {
 
       // this.formContact.setDateEvent(this.startEndEvent.getDateStartEnd());
-      this.contactListService.addPerson(this.formContact.form.value).subscribe((data) => {
+      this.appService.addPerson(this.formContact.form.value).subscribe((data) => {
       this.showSuccess('Klient ' + data.alias + '  został dodany do listy kontaktów');
       this.reloadTab();
 
@@ -38,7 +38,7 @@ export class NewContactComponent  {
     this.toastr.success(text);
   }
   reloadTab() {
-    this.contactListService.reLoadTab();
+    this.appService.reLoadTab();
 
   }
 

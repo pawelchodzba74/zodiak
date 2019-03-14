@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, AfterViewInit, ViewContainerRef  } from '@angular/core';
-import { ContactListService } from '../contact-list.service';
+import { AppService } from '../../app-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormContactComponent } from '../../shared/form-contact/form-contact.component';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { SpinerComponent } from '../../shared/spiner/spiner.component';
-
+import { StartEndEventComponent } from '../../shared/date/start-end-event/start-end-event.component';
 @Component({
   selector: 'app-edit-contact',
   templateUrl: './edit-contact.component.html',
@@ -16,7 +16,7 @@ export class EditContactComponent implements OnInit, AfterViewInit {
    @ViewChild('spiner', {read: ViewContainerRef}) spiner: ViewContainerRef;
    Person;
   constructor(
-    private contactListService: ContactListService,
+    private appService: AppService,
     private route: ActivatedRoute,
     private rout: Router,
     private toastr: ToastrService,
@@ -28,10 +28,16 @@ export class EditContactComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.loadContact();
   }
+  setStartEnd(Date) {
+    this.formContact.setDateEvent(Date);
+
+   }
+
   loadContact(): void {
     const spiner = this.spinerComponent.show(this.spiner);
     const id = this.route.snapshot.params['id'];
-    this.contactListService.getPerson(id).subscribe((person) => {
+
+    this.appService.getPerson(id).subscribe((person) => {
       this.formContact.buildForm(this.formContact.setValueForm(person));
       this.Person = person;
       this.Person.id  = id;
@@ -46,7 +52,7 @@ export class EditContactComponent implements OnInit, AfterViewInit {
   updateContact(): void {
     const ValuesForm = this.formContact.form.value;
     ValuesForm.id = this.Person.id;
-      this.contactListService.upDataPerson(ValuesForm).subscribe((data) => {
+      this.appService.upDataPerson(ValuesForm).subscribe((data) => {
       this.showSuccess('Dane Klienta  ' +  ValuesForm.alias + ' zotały zaktualizowane');
       this.reloadTab();
     },
@@ -57,7 +63,7 @@ export class EditContactComponent implements OnInit, AfterViewInit {
 
   }
   reloadTab(): void {
-    this.contactListService.reLoadTab();
+    this.appService.reLoadTab();
  }
   showSuccess(text): void {
     this.toastr.success(text);

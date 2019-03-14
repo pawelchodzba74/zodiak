@@ -26,13 +26,29 @@ export class FormContactComponent implements OnInit {
   ngOnInit() {
     const Value = this.setValueForm(false);
     this.buildForm(Value);
-    this.form.addControl('startEnd', new FormControl('', Validators.required));
-    }
+    this.setControlStartEnd({
+      name: 'startEnd',
+      value: '',
+      validators: Validators.required
+    });
+  }
 
   setDateEvent(startEndDate): void {
-    this.form.get('startEnd').setValue(startEndDate);
-    this.form.get('startEnd').setValidators(DateEventValid.DateEvent);
-
+    this.setControlStartEnd({
+      name: 'startEnd',
+      value: startEndDate,
+      validators: DateEventValid.DateEvent
+    });
+    // this.form.get('startEnd').setValue(startEndDate);
+    // this.form.get('startEnd').setValidators(DateEventValid.DateEvent);
+  }
+  setControlStartEnd(control) {
+    if (!this.form.controls[control.name]) {
+      this.form.addControl(control.name, new FormControl(control.value, control.validators));
+    } else {
+      this.form.get(control.name).setValue(control.value);
+      this.form.get(control.name).setValidators(control.validators);
+    }
   }
   buildForm(Value): void {
     this.form = this.formBuilder.group({

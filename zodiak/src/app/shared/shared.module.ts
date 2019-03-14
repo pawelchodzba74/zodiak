@@ -17,6 +17,7 @@ import { LabelModule } from '@progress/kendo-angular-label';
 import { TimePickerComponent } from './date/time-picker/time-picker.component';
 import { DayBoundToTimeComponent } from './date/day-bound-to-time/day-bound-to-time.component';
 import { StartEndEventComponent } from './date/start-end-event/start-end-event.component';
+import { BtnScheduleComponent } from './btn-schedule/btn-schedule.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -37,14 +38,15 @@ import { StartEndEventComponent } from './date/start-end-event/start-end-event.c
       DatePickerComponent,
       TimePickerComponent,
       DayBoundToTimeComponent,
-      StartEndEventComponent
+      StartEndEventComponent,
+      BtnScheduleComponent
     ],
   entryComponents: [DialogDeleteComponent, SpinerComponent, ScheduleComponent],
   declarations: [
     DialogDeleteComponent,
     SpinerComponent, PhotoComponent,
     FormContactComponent, ScheduleComponent,
-    ScheduleComponent, DatePickerComponent, TimePickerComponent, DayBoundToTimeComponent, StartEndEventComponent
+    ScheduleComponent, DatePickerComponent, TimePickerComponent, DayBoundToTimeComponent, StartEndEventComponent, BtnScheduleComponent
     ]
 })
 export class SharedModule { }

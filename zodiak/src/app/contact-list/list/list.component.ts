@@ -1,5 +1,5 @@
 import { Component, OnInit,  ViewChild, ViewContainerRef } from '@angular/core';
-import { ContactListService } from './../contact-list.service';
+import { AppService } from '../../app-service.service';
 import { MatDialog, MatTableDataSource, MatTable, MatPaginator, MatSort, MatIconModule} from '@angular/material';
 import { NewContactComponent } from './../new-contact/new-contact.component';
 import { DialogDeleteComponent } from '../../shared/dialog-delete/dialog-delete.component';
@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Person } from '../models/person';
 import { SpinerComponent } from '../../shared/spiner/spiner.component';
 import { AdminSheduleComponent } from '../admin-shedule/admin-shedule.component';
+import { BtnScheduleComponent } from '../../shared/btn-schedule/btn-schedule.component';
 
 @Component({
   selector: 'app-list',
@@ -24,7 +25,7 @@ rooms: string[] = ['1', '2', '3', '4', '5', '6'];
 @ViewChild('spiner', {read: ViewContainerRef}) spiner: ViewContainerRef;
 
 constructor(
-  private contactListService: ContactListService,
+  private appService: AppService,
   private dialog: MatDialog,
   private toastr: ToastrService,
   private spinerComponent: SpinerComponent
@@ -41,7 +42,7 @@ constructor(
   }
   createDataSorce(): void {
     const spiner = this.spinerComponent.show(this.spiner);
-    this.contactListService.read().subscribe((Persons) => {
+    this.appService.read().subscribe((Persons) => {
       this.dataSource = new MatTableDataSource(Persons['records']);
       this.dataSource.sort = this.sort;
       this.createPaginator();
@@ -62,7 +63,7 @@ constructor(
     this.createPaginator().firstPage();
   }
   giveItToServiceContext(): void {
-    this.contactListService.fowardRefTab(this);
+    this.appService.fowardRefTab(this);
   }
   showSuccess(text): void {
      this.toastr.success(text);
@@ -73,7 +74,7 @@ constructor(
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.contactListService.deletePerson(Row).subscribe((data) => {
+        this.appService.deletePerson(Row).subscribe((data) => {
           this.showSuccess('client ' + Row.alias + '  został usunięty z listy kontaktów');
           this.refreshPage();
         },
@@ -87,10 +88,10 @@ constructor(
   openNewContactModal(): void {
      const dialogRef = this.dialog.open(NewContactComponent);
   }
-  openSchedule(nrRoom: number) {
-    this.dialog.open(AdminSheduleComponent, {
-      data: {nrRoom: nrRoom + 1},
-      width: '50%',
-    });
-  }
+  // openSchedule(nrRoom: number) {
+  //   this.dialog.open(AdminSheduleComponent, {
+  //     data: {nrRoom: nrRoom + 1},
+  //     width: '50%',
+  //   });
+  // }
 }

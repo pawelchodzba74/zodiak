@@ -3,7 +3,7 @@ import { ScheduleComponent} from '../../shared/schedule/schedule.component'
 import {  MAT_DIALOG_DATA } from '@angular/material';
 import { Inject } from '@angular/core';
 import { ListComponent } from '../list/list.component';
-import { ContactListService } from '../contact-list.service';
+import { AppService } from '../../app-service.service';
 @Component({
   selector: 'app-admin-shedule',
   templateUrl: './admin-shedule.component.html',
@@ -14,23 +14,22 @@ export class AdminSheduleComponent implements OnInit {
   events ;
 
   constructor(
-    private contactListService: ContactListService,
-    // public dialogRef: MatDialogRef<ListComponent>,
+    private appService: AppService,
     @Inject(MAT_DIALOG_DATA) public data) {}
 
   ngOnInit() {
     this.getEvents();
 
   }
-  getEvents() {//console.log(this.data.nrRoom)
-   this.contactListService.getEvents(this.data.nrRoom)
+  getEvents() {
+   this.appService.getEvents(this.data.nrRoom)
    .then(this.showEvents.bind(this), this.eventsEmpty.bind(this))
 
 }
-showEvents(e) {console.log(e);
+showEvents(e) {
   this.events = e;
 }
 eventsEmpty() {
-  console.log('empty');
+
 }
 }

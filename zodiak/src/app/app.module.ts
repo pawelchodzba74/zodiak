@@ -8,7 +8,6 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing-module';
 import { CoreModule } from '../app/core/core.module';
 import { ToastrModule } from 'ngx-toastr';
-import { ContactListService } from './contact-list/contact-list.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { DeviceDetectorModule } from 'ngx-device-detector';
@@ -22,6 +21,7 @@ import '@progress/kendo-angular-intl/locales/pl/all';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { LabelModule } from '@progress/kendo-angular-label';
 import { ClientsPanelModule } from './clients-panel/clients-panel.module';
+import { AppService } from './app-service.service';
 
 // import { BehaviorSubject } from 'rxjs';
 
@@ -51,10 +51,10 @@ import { ClientsPanelModule } from './clients-panel/clients-panel.module';
 
   ],
   providers: [
-    ContactListService,
     SpinerComponent,
     AuthService,
     LayoutService,
+    AppService
     {provide: LOCALE_ID, useValue: 'pl'}
   ],
   bootstrap: [AppComponent]

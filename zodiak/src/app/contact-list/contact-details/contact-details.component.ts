@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewContainerRef, ViewChild } from '@angular/core';
-import { ContactListService } from '../contact-list.service';
+import { AppService } from '../../app-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { Person } from '../../contact-list/models/person';
 import { ToastrService } from 'ngx-toastr';
@@ -13,7 +13,7 @@ export class ContactDetailsComponent implements OnInit {
   Person: Person;
   @ViewChild('spiner', {read: ViewContainerRef}) spiner: ViewContainerRef;
   constructor(
-    private contactListService: ContactListService,
+    private appService: AppService,
     private route: ActivatedRoute,
     private toastr: ToastrService,
     private spinerComponent: SpinerComponent
@@ -26,7 +26,7 @@ export class ContactDetailsComponent implements OnInit {
   loadContact(): void {
     const spiner = this.spinerComponent.show(this.spiner);
     const id = this.route.snapshot.params['id'];
-    this.contactListService.getPerson(id).subscribe((person) => {
+    this.appService.getPerson(id).subscribe((person) => {
       this.Person = person;
       spiner.destroy();
     },

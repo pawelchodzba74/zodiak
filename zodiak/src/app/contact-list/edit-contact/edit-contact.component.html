@@ -1,12 +1,18 @@
+<ng-template #spiner></ng-template>
 <div  class = "transparent">
-  <ng-template #spiner></ng-template>
   <div class="content">
       <app-form-contact #formContact [Person]="Person" ></app-form-contact>
       <div>
+          <app-start-end-event #startEndEvent
+                          [minDayDefault]='false'
+                          [maxDayDefault]='365'
+                          (date) = "setStartEnd($event)"
+        ></app-start-end-event>
         <button mat-raised-button [routerLink] = "['']">Anuluj</button>
         <button [routerLink] = "['']" (click)="updateContact()" mat-raised-button color = "primary" [disabled] = "formContact.form.invalid" >Dodaj</button>
       </div>
   </div>
+
 
 </div>
 
