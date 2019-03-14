@@ -1,0 +1,17 @@
+
+<kendo-daterange class="">
+
+    <div class="example-config">
+    </div>
+    <div class="example-wrapper" >
+        <kendo-datepicker
+          [placeholder]="placeholder"
+          (valueChange)="onChange($event)"
+          [disabled] = "disabled"
+          [min] ="min"
+          [max] ="max"
+          ></kendo-datepicker>
+     </div>
+  <kendo-daterange-popup [animate]="false"></kendo-daterange-popup>
+</kendo-daterange>
+

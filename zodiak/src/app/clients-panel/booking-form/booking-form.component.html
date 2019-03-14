@@ -1,0 +1,18 @@
+<h6 mat-dialog-title>Zarezerwuj sale</h6>
+<app-form-contact  #formContact></app-form-contact>
+<app-start-end-event #startEndEvent
+[minDayDefault]='0'
+[maxDayDefault]='6'
+(date) = "setStartEnd($event)"
+></app-start-end-event>
+<div class="content-form">
+    <mat-dialog-actions>
+      <div class="row">
+        <div class="col">
+          <button mat-raised-button mat-dialog-close>Anuluj</button>
+          <button mat-raised-button color = "primary" [disabled] = "formContact.form.invalid" mat-dialog-close>Dodaj</button>
+        </div>
+      </div>
+    </mat-dialog-actions>
+  </div>
+

@@ -1,0 +1,11 @@
+<div class="example-wrapper ">
+    <!-- <p>Select a date:</p> -->
+    <kendo-timepicker [placeholder]="placeholder"
+        [format]="'HH:mm'"
+        [steps]="steps"
+
+        (valueChange)="getHoursTime($event)"
+        [disabled] = 'disabled'
+    ></kendo-timepicker>
+    <!-- <p>(↑ to increment and ↓ to decrement the value)</p> -->
+</div>

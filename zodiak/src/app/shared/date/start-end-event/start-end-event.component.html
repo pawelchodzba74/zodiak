@@ -1,0 +1,29 @@
+<div class=" container " style="height: 150px">
+  <div class="container my-2">
+    <div class="text-center">
+      start
+    </div>
+    <app-day-bound-to-time
+                            #start
+                            (dateReady) = "startEvent($event)"
+                            placeholderDate = "Data rozpoczęcia"
+                            placeholderTime = "godzina rozpoczęcia"
+                            class="row"
+    ></app-day-bound-to-time>
+  </div>
+
+  <div class="container my-3">
+    <div class="text-center">
+      koniec
+    </div>
+    <app-day-bound-to-time
+                            #end
+                            (dateReady) = "endEvent($event)"
+                            [disabled] = "disabled"
+                            placeholderDate = "Data zakończenia"
+                            placeholderTime = "godzina zakończenia"
+                            class="row"
+    ></app-day-bound-to-time>
+  </div>
+  <!-- <div *ngFor = 'let error of errorsAlert'>{{error}}</div> -->
+</div>

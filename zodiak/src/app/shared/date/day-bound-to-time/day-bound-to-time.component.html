@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row justify-content-around ">
+    <app-data-picker
+                    #datepicker
+                    [disabled] = "disabled"
+                    (date)= 'glueDateTime($event)'
+                    class="row "
+    ></app-data-picker>
+
+    <app-time-picker
+                    #timepicker
+                    [disabled] = "disabled"
+                    (hoursMinutes)='glueDateTime($event)'
+                    class="row "
+    ></app-time-picker>
+  </div>
+</div>
