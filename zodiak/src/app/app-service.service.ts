@@ -24,7 +24,7 @@
       private divaceDetector: DeviceDetectorService
       ) {}
 
-    addPerson(person: Person): Observable<any> {
+    addPerson(person): Observable<any> {
       const phpUrl = 'http://localhost/contact-new/back-end/create.php';
       // const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
       // const phpUrl = prefixRoute + 'back-end/create.php';
@@ -33,11 +33,11 @@
         catchError(this.handleError)
       );
     }
-    read(): Observable<Person[]> {
+    read() {
       const phpUrl = 'http://localhost/contact-new/back-end/read.php';
       // const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
       // const phpUrl = prefixRoute + 'back-end/read.php';
-      return this.http.get<Person[]>(phpUrl)
+      return this.http.get(phpUrl)
         .pipe(
           retry(3),
           catchError(this.handleError));
@@ -53,7 +53,7 @@
         );
     }
     // tslint:disable-next-line:max-line-length
-    upDataPerson(person: Person): Observable<object> {
+    upDataPerson(person): Observable<object> {
   /////////////////////////////////////////////////////// set data time //////////////////////
       // person.dateDo = person.dateDo.setHours(person.hoursDo.split(':')[0], person.hoursDo.split(':')[1]) ;
       ///////////////////////////////////////////////////////////////////////////
@@ -65,7 +65,7 @@
           catchError(this.handleError)
         );
   }
-    deletePerson(person: Person): Observable<object> {
+    deletePerson(person): Observable<object> {
       const phpUrl = 'http://localhost/contact-new/back-end/delete.php';
       // const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
       // const phpUrl = prefixRoute + 'back-end/delete.php';

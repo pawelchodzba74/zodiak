@@ -22,6 +22,8 @@ import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { LabelModule } from '@progress/kendo-angular-label';
 import { ClientsPanelModule } from './clients-panel/clients-panel.module';
 import { AppService } from './app-service.service';
+// import { LayoutModule } from '@progress/kendo-angular-layout';
+import { PanelBarModule } from '@progress/kendo-angular-layout';
 
 // import { BehaviorSubject } from 'rxjs';
 
@@ -45,7 +47,8 @@ import { AppService } from './app-service.service';
     AmazingTimePickerModule,
     DateInputsModule,
     LabelModule,
-    ClientsPanelModule
+    ClientsPanelModule,
+    PanelBarModule
     // SchedulerModule
 
 
@@ -54,7 +57,7 @@ import { AppService } from './app-service.service';
     SpinerComponent,
     AuthService,
     LayoutService,
-    AppService
+    AppService,
     {provide: LOCALE_ID, useValue: 'pl'}
   ],
   bootstrap: [AppComponent]
