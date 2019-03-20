@@ -24,6 +24,8 @@ import { ClientsPanelModule } from './clients-panel/clients-panel.module';
 import { AppService } from './app-service.service';
 // import { LayoutModule } from '@progress/kendo-angular-layout';
 import { PanelBarModule } from '@progress/kendo-angular-layout';
+import { ScrollViewModule } from '@progress/kendo-angular-scrollview';
+
 
 // import { BehaviorSubject } from 'rxjs';
 
@@ -48,7 +50,8 @@ import { PanelBarModule } from '@progress/kendo-angular-layout';
     DateInputsModule,
     LabelModule,
     ClientsPanelModule,
-    PanelBarModule
+    PanelBarModule,
+    ScrollViewModule
     // SchedulerModule
 
 

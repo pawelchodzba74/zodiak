@@ -5,9 +5,9 @@ import { AdminSheduleComponent } from '../../contact-list/admin-shedule/admin-sh
 import { ClientScheduleComponent } from '../../clients-panel/client-schedule/client-schedule.component';
 @Component({
   selector: 'app-btn-schedule',
-  template: `<div (click) = "openDialog($event)">
+  template: `<div (click) = "openD\ialog($event)">
               <button *ngFor = "let room of nrRooms"
-                mat-flat-button color="primary" style= "width:10px">{{room}}
+                 id = "{{room}}" color="primary" style= "width:10px">sprawdź dostępnnoć sali {{room}}
               </button>
              </div>
              `,
@@ -23,22 +23,20 @@ export class BtnScheduleComponent implements OnInit {
     this.checkRole();
   }
   checkRole() {
-   this.propSchedule =  this.admin ? this.setObjAdmin() : this.setObjClient();
+   this.propSchedule =  this.admin ? this.setObj(AdminSheduleComponent) : this.setObj(ClientScheduleComponent);
   }
-  setObjAdmin() {
+  setObj(component) {
     return {
-      component: AdminSheduleComponent,
+      component: component,
       nrRoom: ''
     };
   }
-  setObjClient() {
-    return {
-      component: ClientScheduleComponent,
-      nrRoom: ''
-    };
-  }
-  openDialog(e) {
-    this.propSchedule.nrRoom = e.target.tagName === 'BUTTON' ? e.target.textContent : null;
+  openDialog(e) {//console.log(e);
+    const target = e.target;
+    const nodeName = target.tagName;
+    console.log(nodeName);
+
+    this.propSchedule.nrRoom = nodeName === 'BUTTON' ? target.id : null;
     this.openSchedule();
   }
 

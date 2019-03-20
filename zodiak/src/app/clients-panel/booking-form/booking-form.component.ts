@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { FormContactComponent } from './../../shared/form-contact/form-contact.component';
 import { StartEndEventComponent } from '../../shared/date/start-end-event/start-end-event.component';
+import { MAT_DIALOG_DATA } from '@angular/material';
+
 
 @Component({
   selector: 'app-booking-form',
@@ -10,7 +12,7 @@ import { StartEndEventComponent } from '../../shared/date/start-end-event/start-
 export class BookingFormComponent implements OnInit {
   @ViewChild('formContact') formContact: FormContactComponent;
   @ViewChild('startEndEvent') startEndEvent;
-  constructor() { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data) { }
 
   ngOnInit() {
   }

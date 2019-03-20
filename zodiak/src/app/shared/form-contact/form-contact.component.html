@@ -45,12 +45,25 @@
     </div>
     <div class="col-sm-4">
       <mat-form-field>
-          <mat-select formControlName="sex" [(value)]="selected">
+          <mat-select formControlName="sex" ><!--  [(value)]="selectedSex" -->
             <mat-option  value="k">Kobieta</mat-option>
             <mat-option  value="m">Mężczyzna</mat-option>
           </mat-select>
           <mat-error *ngIf="form.get('sex').hasError('required')">pole jest wymagane</mat-error>
-        </mat-form-field>
+      </mat-form-field>
+      <!-- /// nr room ////  -->
+      <mat-form-field>
+        <mat-select formControlName="nrRoom" placeholder="numer sali"> <!--  [(value)]="selectedRoom" -->
+
+          <mat-option  value="1">1</mat-option>
+          <mat-option  value="2">2</mat-option>
+          <mat-option  value="3">3</mat-option>
+          <mat-option  value="4">4</mat-option>
+          <mat-option  value="5">5</mat-option>
+          <mat-option  value="6">6</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('nrRoom').hasError('required')">pole jest wymagane</mat-error>
+    </mat-form-field>
     </div>
 
 

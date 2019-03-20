@@ -1,5 +1,8 @@
 <h6 mat-dialog-title>Zarezerwuj sale</h6>
-<app-form-contact  #formContact></app-form-contact>
+<app-form-contact
+                #formContact
+                [data]= "data"
+></app-form-contact>
 <app-start-end-event #startEndEvent
 [minDayDefault]='0'
 [maxDayDefault]='6'

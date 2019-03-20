@@ -21,15 +21,17 @@ export class AdminSheduleComponent implements OnInit {
     this.getEvents();
 
   }
-  getEvents() {
+  getEvents() {//console.log(this.data);
    this.appService.getEvents(this.data.nrRoom)
    .then(this.showEvents.bind(this), this.eventsEmpty.bind(this))
 
 }
-showEvents(e) {
+showEvents(e) {console.log(e);
+
   this.events = e;
 }
 eventsEmpty() {
+
 
 }
 }

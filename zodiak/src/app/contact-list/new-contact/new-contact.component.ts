@@ -1,8 +1,9 @@
-import { Component , ViewChild} from '@angular/core';
+import { Component , ViewChild, Inject} from '@angular/core';
 import { FormContactComponent } from './../../shared/form-contact/form-contact.component';
 import { AppService } from '../../app-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { StartEndEventComponent } from '../../shared/date/start-end-event/start-end-event.component';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class NewContactComponent  {
   @ViewChild('startEndEvent') startEndEvent;
   constructor(
     private appService: AppService ,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    // @Inject(MAT_DIALOG_DATA) public data
   ) { }
 
   setStartEnd(Date) {

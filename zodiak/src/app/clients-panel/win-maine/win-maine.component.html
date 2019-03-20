@@ -1,10 +1,4 @@
 <div class="d-flex">
-<app-panel-bar  class = "bg-primary"></app-panel-bar>
-  <!-- <app-sale></app-sale> -->
-  <app-schema class = "bg-secondary"></app-schema>
-  <app-btn-schedule
-                    [nrRooms] = "[1,2,3,4,5,6]"
-                    [admin] = "true"
-    ></app-btn-schedule>
-
+  <app-panel-bar #panelBar  class = "bg-primary"></app-panel-bar>
+  <app-schema  (trigerRoom) = 'trigerRoom($event)' class = "bg-secondary"></app-schema>
 </div>

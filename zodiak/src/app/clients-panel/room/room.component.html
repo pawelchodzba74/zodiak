@@ -1,0 +1,10 @@
+<div                                              >
+  <app-btn-schedule
+                      [nrRooms] = "[id]"
+                      [admin] = "true"
+  ></app-btn-schedule>
+
+  <button (click) = "booking([id])"><span>wynjmnij sale: </span>{{[id][0]}}</button>
+
+  <app-scroll-view></app-scroll-view>
+</div>

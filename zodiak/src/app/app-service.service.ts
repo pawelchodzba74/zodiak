@@ -135,143 +135,143 @@
     }
 
 
-    mockEvents() {this.fabrickMock();
+    mockEvents() { //this.fabrickMock();
 
         return[
         { id: 1,
-      start: new Date('2019-03-12T09:00:00'),
-      end: new Date('2019-03-12T12:30:00'),
+      start: new Date('2019-03-19T09:00:00'),
+      end: new Date('2019-03-12T19:30:00'),
       title: '11 NOVA - pisać pierwsze nazwę firmy wynajmującej będzie wtety dobrze widać w tygodniowym ujęciu',
       isAllDay: true,
       nrRoom: '1'
       },
       {
       id: 2,
-      start: new Date('2019-03-12T11:00:00'),
-      end: new Date('2019-03-12T12:30:00'),
+      start: new Date('2019-03-19T11:00:00'),
+      end: new Date('2019-03-19T12:30:00'),
       title: '2222222222222',
       isAllDay: false,
       nrRoom: '1'
       },
       {
       id: 3,
-      start: new Date('2019-03-12T09:00:00'),
-      end: new Date('2019-03-12T11:30:00'),
+      start: new Date('2019-03-19T09:00:00'),
+      end: new Date('2019-03-19T11:30:00'),
       title: '333333333333333333333',
       isAllDay: false,
       nrRoom: '1'
       },
       { id: 1,
-        start: new Date('2019-03-12T09:00:00'),
-        end: new Date('2019-03-12T11:30:00'),
+        start: new Date('2019-03-19T09:00:00'),
+        end: new Date('2019-03-19T11:30:00'),
         title: '11 NOVA - pisać pierwsze nazwę firmy wynajmującej będzie wtety dobrze widać w tygodniowym ujęciu',
         isAllDay: true,
         nrRoom: '2'
         },
         {
         id: 2,
-        start: new Date('2019-03-12T11:00:00'),
-        end: new Date('2019-03-12T12:30:00'),
+        start: new Date('2019-03-19T11:00:00'),
+        end: new Date('2019-03-19T12:30:00'),
         title: '2222222222222',
         isAllDay: false,
         nrRoom: '2'
         },
         {
         id: 3,
-        start: new Date('2019-03-12T09:00:00'),
-        end: new Date('2019-03-12T11:30:00'),
+        start: new Date('2019-03-19T09:00:00'),
+        end: new Date('2019-03-19T11:30:00'),
         title: '333333333333333333333',
         isAllDay: false,
         nrRoom: '2'
         },
         { id: 1,
-          start: new Date('2019-03-12T09:00:00'),
-          end: new Date('2019-03-12T11:30:00'),
+          start: new Date('2019-03-19T09:00:00'),
+          end: new Date('2019-03-19T11:30:00'),
           title: '11 NOVA - pisać pierwsze nazwę firmy wynajmującej będzie wtety dobrze widać w tygodniowym ujęciu',
           isAllDay: true,
           nrRoom: '3'
           },
           {
           id: 2,
-          start: new Date('2019-03-12T11:00:00'),
-          end: new Date('2019-03-12T12:30:00'),
+          start: new Date('2019-03-19T11:00:00'),
+          end: new Date('2019-03-19T12:30:00'),
           title: '2222222222222',
           isAllDay: false,
           nrRoom: '3'
           },
           {
           id: 3,
-          start: new Date('2019-03-12T09:00:00'),
-          end: new Date('2019-03-12T11:30:00'),
+          start: new Date('2019-03-19T09:00:00'),
+          end: new Date('2019-03-19T11:30:00'),
           title: '333333333333333333333',
           isAllDay: false,
           nrRoom: '3'
           },
           { id: 1,
-            start: new Date('2019-03-12T09:00:00'),
-            end: new Date('2019-03-12T11:30:00'),
+            start: new Date('2019-03-19T09:00:00'),
+            end: new Date('2019-03-19T11:30:00'),
             title: '11 NOVA - pisać pierwsze nazwę firmy wynajmującej będzie wtety dobrze widać w tygodniowym ujęciu',
             isAllDay: true,
             nrRoom: '4'
             },
             {
             id: 2,
-            start: new Date('2019-03-12T11:00:00'),
-            end: new Date('2019-03-12T12:30:00'),
+            start: new Date('2019-03-19T11:00:00'),
+            end: new Date('2019-03-19T12:30:00'),
             title: '2222222222222',
             isAllDay: false,
             nrRoom: '4'
             },
             {
             id: 3,
-            start: new Date('2019-03-12T09:00:00'),
-            end: new Date('2019-03-12T11:30:00'),
+            start: new Date('2019-03-19T09:00:00'),
+            end: new Date('2019-03-19T11:30:00'),
             title: '333333333333333333333',
             isAllDay: false,
             nrRoom: '4'
             },
             { id: 1,
-              start: new Date('2019-03-12T09:00:00'),
-              end: new Date('2019-03-12T11:30:00'),
+              start: new Date('2019-03-19T09:00:00'),
+              end: new Date('2019-03-19T11:30:00'),
               title: '11 NOVA - pisać pierwsze nazwę firmy wynajmującej będzie wtety dobrze widać w tygodniowym ujęciu',
               isAllDay: true,
               nrRoom: '5'
               },
               {
               id: 2,
-              start: new Date('2019-03-12T11:00:00'),
-              end: new Date('2019-03-12T12:30:00'),
+              start: new Date('2019-03-19T11:00:00'),
+              end: new Date('2019-03-19T12:30:00'),
               title: '2222222222222',
               isAllDay: false,
               nrRoom: '5'
               },
               {
               id: 3,
-              start: new Date('2019-03-12T09:00:00'),
-              end: new Date('2019-03-12T11:30:00'),
+              start: new Date('2019-03-19T09:00:00'),
+              end: new Date('2019-03-19T11:30:00'),
               title: '333333333333333333333',
               isAllDay: false,
               nrRoom: '5'
               },
               { id: 1,
-                start: new Date('2019-03-12T09:00:00'),
-                end: new Date('2019-03-12T11:30:00'),
+                start: new Date('2019-03-19T09:00:00'),
+                end: new Date('2019-03-19T11:30:00'),
                 title: '11 NOVA - pisać pierwsze nazwę firmy wynajmującej będzie wtety dobrze widać w tygodniowym ujęciu',
                 isAllDay: true,
                 nrRoom: '6'
                 },
                 {
                 id: 2,
-                start: new Date('2019-03-12T11:00:00'),
-                end: new Date('2019-03-12T12:30:00'),
+                start: new Date('2019-03-19T11:00:00'),
+                end: new Date('2019-03-19T12:30:00'),
                 title: '2222222222222',
                 isAllDay: false,
                 nrRoom: '6'
                 },
                 {
                 id: 3,
-                start: new Date('2019-03-12T09:00:00'),
-                end: new Date('2019-03-12T11:30:00'),
+                start: new Date('2019-03-19T09:00:00'),
+                end: new Date('2019-03-19T11:30:00'),
                 title: '333333333333333333333',
                 isAllDay: false,
                 nrRoom: '6'
