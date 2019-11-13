@@ -1,0 +1,50 @@
+
+.status{
+padding-left:10px;
+}
+.pendding{
+background-color: rgba(222, 0,0, 0.1);
+}
+
+table {
+  width: 100%;
+}
+.mat-form-field {
+  font-size: 12px;
+  width: 100%;
+}
+  tr:nth-child(even){
+    background-color: rgb(230, 227, 217);
+  }
+
+.footer-tabs{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background-color: white;
+  z-index: 0;
+}
+mat-icon{
+  cursor: pointer;
+}
+
+.tools{
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 40%;
+}
+td{
+  max-width: 100px;
+  /* max-height: 50px; */
+  overflow: auto;
+  /* overflow: scroll; */
+}
+
+.basik-cell {
+padding-right:3px;
+/* overflow-wrap: break-word; */
+
+}

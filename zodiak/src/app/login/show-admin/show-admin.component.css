@@ -1,0 +1,11 @@
+
+.mat-flat-button{
+  /* margin-left: 5px; */
+}
+.tools{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  /* background-color: blueviolet; */
+}

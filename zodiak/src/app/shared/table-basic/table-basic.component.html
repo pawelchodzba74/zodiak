@@ -1,0 +1,86 @@
+
+<div  *ngIf="error" class="alert alert-danger pt-5 mt-5" role="alert">
+  {{error}}
+</div>
+<div  *ngIf="!error" class="table-all">
+  <div  class="mat-elevation-z8">
+    <table matSort mat-table  [dataSource]="dataSource"  matSortActive="id" matSortDirection="desc" matSortDisableClear>
+              <!-- columns -->
+      <ng-container  *ngFor = "let column of ModelMaterialTable ; let i = index "  matColumnDef="{{displayedColumns[i]}}">
+          <span >
+            <th appShowHideHeaders = '{{column[displayedColumns[i]]}}'  mat-header-cell *matHeaderCellDef mat-sort-header>{{column[displayedColumns[i]]}}</th>
+          </span>
+            <td mat-cell *matCellDef="let row">
+
+            <!--/////////////////////////////// kindes of cells ///////////////////////////////   -->
+                <!-- basic cell -->
+              <span *ngIf = '!row[displayedColumns[i]].action' class = "basik-cell">
+                <ng-container [ngSwitch]="displayedColumns[i]">
+                  <!-- format-cell -->
+                  <ng-container *ngSwitchCase = '"start" '>{{row[displayedColumns[i]] | slice:0:16 }} </ng-container>
+                  <ng-container *ngSwitchCase = '"end" '>{{row[displayedColumns[i]] | slice:0:16 }} </ng-container>
+                  <ng-container *ngSwitchDefault> {{row[displayedColumns[i]]}} </ng-container>
+                </ng-container>
+              </span>
+                <!-- routing -->
+              <a *appRout = 'row[displayedColumns[i]].action' [routerLink] = "[row[displayedColumns[i]].path, row.id]"
+                mat-raised-button>{{row[displayedColumns[i]].label}}
+              </a>
+              <!-- invokes function -->
+              <button *appCallFn = 'row[displayedColumns[i]].action' (click)="onCall(row[displayedColumns[i]].nameMethod, row)"
+                mat-raised-button>{{row[displayedColumns[i]].label}}
+              </button>
+              <!-- select -->
+              <mat-form-field *appSelect = 'row[displayedColumns[i]].action'
+                class="status"
+                [ngClass]="{'pendding': row['status']=='oczekujący'}"
+                >
+                <mat-label>{{row['status']}}</mat-label>
+                <mat-select >
+                  <ng-container *ngFor = 'let option of row[displayedColumns[i]].options'>
+                    <mat-option
+                      *ngIf = 'row["status"] !== option.value'
+                      (click)="onCall(row[displayedColumns[i]].nameMethod, row, option)"
+                      [value]= 'option.value'
+                    >
+                      {{option.value}}
+                    </mat-option>
+                  </ng-container>
+                  <!-- <mat-option  value="m">Mężczyzna</mat-option> -->
+                </mat-select>
+              </mat-form-field>
+            <!-- //////////////////////////////////////////////////////////////////////////////// -->
+            </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" > </tr>
+
+    </table>
+  </div>
+      <!-- footer ---------------------------------------------------------------------footer-->
+  <div class="footer-tabs fixed-bottom">
+       <!-- filtr -->
+    <div>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    </div>
+      <!-- tools -->
+    <div class= "tools">
+      <ng-content select = "[tools]" ></ng-content>
+    </div>
+      <!-- paginator -->
+    <div>
+      <mat-paginator [pageSizeOptions]="[20, 40, 60]"></mat-paginator>
+    </div>
+    <!-- <div>
+      <app-btn-schedule
+      [nrRooms] = "[1,2,3,4,5,6]"
+      [admin] = "true"
+      ></app-btn-schedule>
+    </div> -->
+    <!-- paginator -->
+  </div>
+</div>
+<ng-template #spiner></ng-template>
+<router-outlet></router-outlet>

@@ -1,0 +1,103 @@
+[
+
+{
+"nr": "1",
+"booking":"true",
+"name": "Sala duża 1 nr:1",
+"info":"Duża sala o powierzchni 288 m2 może swobodnie pomieścić 160 -180 osób. Świetnie nadaje się wesela, bankiety oraz konferencje. Wyposażona jest w ściankę akustyczną, która umożliwia podział dużej sali na dwie mniejsze, co pozwala na odbycie się dwóch eventów do 80 osób w tym samym czasie.",
+"photoUrl":["./assets/duza1.jpg", "https://bit.ly/2cJl3Cx"]
+},
+{
+"nr": "2",
+"booking":"true",
+"name": "Sala duża 2 nr:2",
+"info":"Duża sala o powierzchni 288 m2 może swobodnie pomieścić 160 -180 osób. Świetnie nadaje się wesela, bankiety oraz konferencje. Wyposażona jest w ściankę akustyczną, która umożliwia podział dużej sali na dwie mniejsze, co pozwala na odbycie się dwóch eventów do 80 osób w tym samym czasie.",
+"photoUrl":["https://bit.ly/2cTBNaL"]
+},
+{
+"nr": "3",
+"booking":"true",
+"name": "Kuchnia nr:3",
+"info":"Kuchnia",
+"photoUrl":["https://bit.ly/2cJl3Cx"]
+},
+{
+"nr": "4",
+"booking":"true",
+"name": "Sala średnia nr:4",
+"info":"Średnia sala o powierzchni 48 m2 jest idealna na mniejsze szkolenia, konferencje lub spotkania biznesowe.",
+"photoUrl":[]
+},
+
+{
+"nr": "5",
+"booking":"true",
+"name": "Sala mała nr:5",
+"info":"5Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+"photoUrl":[]
+},
+{
+"nr": "6",
+"booking":"true",
+"name": "Sala kominkowa nr:6",
+"info":"6Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+"photoUrl":[]
+},
+{
+"nr": "7",
+"booking":"false",
+"name": "Szatnia",
+"info":"",
+"photoUrl":[]
+},
+{
+"nr": "8",
+"booking":"false",
+"name": "Toaleta",
+"info":"",
+"photoUrl":[]
+},
+{
+"nr": "9",
+"booking":"false",
+"name": "Schody",
+"info":"",
+"photoUrl":[]
+},
+{
+"nr": "10",
+"booking":"false",
+"name": "Bar",
+"info":"",
+"photoUrl":[]
+},
+{
+"nr": "11",
+"booking":"false",
+"name": "Schody",
+"info":"",
+"photoUrl":[]
+},
+{
+"nr": "12",
+"booking":"false",
+"name": "Toaleta",
+"info":"",
+"photoUrl":[]
+},
+{
+"nr": "13",
+"booking":"false",
+"name": "Kierownik",
+"info":"",
+"photoUrl":[]
+},
+{
+"nr": "14",
+"booking":"false",
+"name": "Szatnia",
+"info":"",
+"photoUrl":[]
+}
+
+]

@@ -3,7 +3,7 @@
     <kendo-timepicker [placeholder]="placeholder"
         [format]="'HH:mm'"
         [steps]="steps"
-
+        [(value)]="value"
         (valueChange)="getHoursTime($event)"
         [disabled] = 'disabled'
     ></kendo-timepicker>

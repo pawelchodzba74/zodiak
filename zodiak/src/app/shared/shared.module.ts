@@ -18,6 +18,16 @@ import { TimePickerComponent } from './date/time-picker/time-picker.component';
 import { DayBoundToTimeComponent } from './date/day-bound-to-time/day-bound-to-time.component';
 import { StartEndEventComponent } from './date/start-end-event/start-end-event.component';
 import { BtnScheduleComponent } from './btn-schedule/btn-schedule.component';
+import { LogEssentialComponent } from './log-essential/log-essential.component';
+import { TableBasicComponent } from './table-basic/table-basic.component';
+import { RequireKeys } from './validators/reqire-key';
+import { ShowHideHeadersDirective } from './directives/show-hide-headers.directive';
+import { RoutDirective } from './directives/rout.directive';
+import { CallFnDirective } from './directives/call-fn.directive';
+import { CompareDateStartEndDirective } from './validators/compare-date-start-end.directive';
+import { SelectDirective } from './directives/select.directive';
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -29,9 +39,11 @@ import { BtnScheduleComponent } from './btn-schedule/btn-schedule.component';
     SchedulerModule,
     DateInputsModule,
     LabelModule
+
   ],
-  exports: [DialogDeleteComponent,
-     SpinerComponent,
+  exports: [
+      DialogDeleteComponent,
+      SpinerComponent,
       PhotoComponent,
       FormContactComponent,
       ScheduleComponent,
@@ -39,14 +51,33 @@ import { BtnScheduleComponent } from './btn-schedule/btn-schedule.component';
       TimePickerComponent,
       DayBoundToTimeComponent,
       StartEndEventComponent,
-      BtnScheduleComponent
+      BtnScheduleComponent,
+      LogEssentialComponent,
+      TableBasicComponent,
+      ShowHideHeadersDirective,
+      RoutDirective,
+      CallFnDirective,
+      SelectDirective
+
+
     ],
   entryComponents: [DialogDeleteComponent, SpinerComponent, ScheduleComponent],
   declarations: [
     DialogDeleteComponent,
     SpinerComponent, PhotoComponent,
     FormContactComponent, ScheduleComponent,
-    ScheduleComponent, DatePickerComponent, TimePickerComponent, DayBoundToTimeComponent, StartEndEventComponent, BtnScheduleComponent
+    ScheduleComponent, DatePickerComponent,
+    TimePickerComponent, DayBoundToTimeComponent,
+    StartEndEventComponent, BtnScheduleComponent,
+    LogEssentialComponent, TableBasicComponent,
+    ShowHideHeadersDirective, RoutDirective,
+    CallFnDirective, CompareDateStartEndDirective,
+    SelectDirective
+
+    ],
+    providers: [
+      RequireKeys
     ]
+
 })
 export class SharedModule { }

@@ -27,21 +27,21 @@ export class NewContactComponent  {
   createContact(alias: string): void {
 
       // this.formContact.setDateEvent(this.startEndEvent.getDateStartEnd());
-      this.appService.addPerson(this.formContact.form.value).subscribe((data) => {
-      this.showSuccess('Klient ' + data.alias + '  został dodany do listy kontaktów');
-      this.reloadTab();
+      // this.appService.addPerson(this.formContact.form.value).subscribe((data) => {
+      // this.showSuccess('Klient ' + data.alias + '  został dodany do listy kontaktów');
+      // this.reloadTab();
 
-  },
-    (e) => {console.log(e);
-      this.toastr.error(e, 'Bład');
-    });
+  // },
+  //   (e) => {console.log(e);
+  //     this.toastr.error(e, 'Bład');
+  //   });
   }
   showSuccess(text: string): void {
     this.toastr.success(text);
   }
-  reloadTab() {
-    this.appService.reLoadTab();
+  // reloadTab() {
+  //   this.appService.reLoadTab();
 
-  }
+  // }
 
 }

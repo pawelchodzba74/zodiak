@@ -1,21 +1,23 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-time-picker',
   templateUrl: './time-picker.component.html',
   styleUrls: ['./time-picker.component.css']
 })
-export class TimePickerComponent  {
+export class TimePickerComponent implements OnInit  {
   public steps: any = { hour: 1, minute: 30 };
-  public value: Date = new Date();
+  public value;
   public time = {
-    hours: this.value.getHours(),
-    minutes: this.value.getMinutes()
+    hours: new Date ().getHours(),
+    minutes: new Date ().getMinutes()
   };
   @Output() hoursMinutes: EventEmitter<any> = new EventEmitter();
   @Input() disabled;
   placeholder: string;
-
+  ngOnInit() {
+    // this.setDefaultDate();
+    }
   setPlaceholder(placeholder): void {
     this.placeholder  = placeholder;
   }
@@ -30,6 +32,9 @@ export class TimePickerComponent  {
   }
   chengeDisabled(disabled): void {
     this.disabled = disabled;
+  }
+  setDefaultDate(date = false) {
+    this.value = date;
   }
 
 

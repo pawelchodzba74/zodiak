@@ -1,97 +1,150 @@
-import { Component, OnInit,  ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { AppService } from '../../app-service.service';
-import { MatDialog, MatTableDataSource, MatTable, MatPaginator, MatSort, MatIconModule} from '@angular/material';
-import { NewContactComponent } from './../new-contact/new-contact.component';
-import { DialogDeleteComponent } from '../../shared/dialog-delete/dialog-delete.component';
-import { ToastrService } from 'ngx-toastr';
 import { Person } from '../models/person';
-import { SpinerComponent } from '../../shared/spiner/spiner.component';
-import { AdminSheduleComponent } from '../admin-shedule/admin-shedule.component';
-import { BtnScheduleComponent } from '../../shared/btn-schedule/btn-schedule.component';
+import { withoutKeys } from '../../shared/object-proces/withoutKey.js';
+import { addNewProperties } from '../../shared/object-proces/addNewProperties.js';
+import { createModelForMaterialTable } from '../../shared/object-proces/create-model-for-material-table.js';
+import { DialogDeleteComponent } from '../../shared/dialog-delete/dialog-delete.component';
+import { MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material';
+import { ToastrService } from 'ngx-toastr';
+import { TokenService } from '../../auth/token.service';
+import { RefreshTableService } from '../../shared/services/refresh-table.service';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css'],
 })
-export class ListComponent implements OnInit {
+export class ListComponent  implements OnInit {
+  @ViewChild('LogOut') LogOut;
+  appService;
+  model: Person;
+  ModelFromRent;
+  configLogOut;
+  AdditionalModel;
+  exceptionsIsObject = [{key: 'user_name', value: ''}];
+  constructor (
+    public dialog: MatDialog,
+    public toastrService: ToastrService,
+    private service: AppService,
+    private tokenService: TokenService,
+    private refreshTable: RefreshTableService,
 
-displayedColumns: string[] = ['Nazwa', 'Sala', 'Data', 'Email', 'Telephon', 'Description', 'Admin', 'details', 'edit', 'delete'];
-dataSource: MatTableDataSource<Person>;
-error: string;
-rooms: string[] = ['1', '2', '3', '4', '5', '6'];
-@ViewChild(MatPaginator) paginator: MatPaginator;
-@ViewChild(MatSort) sort: MatSort;
-@ViewChild('spiner', {read: ViewContainerRef}) spiner: ViewContainerRef;
+  ) {
+    this.appService =  this.service;
 
-constructor(
-  private appService: AppService,
-  private dialog: MatDialog,
-  private toastr: ToastrService,
-  private spinerComponent: SpinerComponent
-) { }
+  }
   ngOnInit() {
-    this.giveItToServiceContext();
-    this.createDataSorce();
+    this.setModelForMaterialTable();
   }
-  applyFilter(filterValue: string): void {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-        this.dataSource.paginator.firstPage();
-    }
+  setModelForMaterialTable() {
+    // this.ModelFromRent = withoutKeys(this.createModel, 'sex', 'photo');
+    // this.ModelFromRent  = addNewProperties(this.ModelFromRent,
+    //   createModelForMaterialTable(this.additionalModel));
+    this.AdditionalModel = createModelForMaterialTable(this.createAdditionalModel);
+    this.ModelFromRent = createModelForMaterialTable(this.createModel);
+    // console.log(this.AdditionalModel);
+
   }
-  createDataSorce(): void {
-    const spiner = this.spinerComponent.show(this.spiner);
-    this.appService.read().subscribe((Persons) => {
-      this.dataSource = new MatTableDataSource(Persons['records']);
-      this.dataSource.sort = this.sort;
-      this.createPaginator();
-      spiner.destroy();
-    },
-      (error) => {
-        this.error = error;
-        spiner.destroy();
-       }
-    );
-  }
-  createPaginator(): MatPaginator {
-    this.dataSource.paginator = this.paginator;
-    return this.paginator;
-  }
-  refreshPage(): void {
-    this.createDataSorce();
-    this.createPaginator().firstPage();
-  }
-  giveItToServiceContext(): void {
-    this.appService.fowardRefTab(this);
-  }
-  showSuccess(text): void {
-     this.toastr.success(text);
-  }
-  delete(Row): void {
-    const dialogRef = this.dialog.open(DialogDeleteComponent, {
-      data: {alias: Row.alias}
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.appService.deletePerson(Row).subscribe((data) => {
-          this.showSuccess('client ' + Row.alias + '  został usunięty z listy kontaktów');
-          this.refreshPage();
-        },
-          (error) => {
-            this.toastr.error(error, ' Bład');
+  get createAdditionalModel() {
+    return {
+      edit: {
+        action: 'routing',
+        path: 'edit',
+        label: 'edytuj'
+      },
+      delete: {
+        action: 'callFn',
+        label: 'usuń',
+        nameMethod: 'delete',
+      },
+      chengeStatus: {
+        action: 'select',
+        label: 'status',
+        options: [
+          {
+            nameView: 'pendding',
+            value: 'oczekujący'
+          },
+          {
+            nameView: 'isAccept',
+            value: 'zatwierdzony'
+          },
+          {
+            nameView: 'isPaid',
+            value: 'zapłacony'
           }
-        );
+        ],
+        nameMethod: 'changeStatus'
       }
-    });
+
+    };
   }
-  openNewContactModal(): void {
-     const dialogRef = this.dialog.open(NewContactComponent);
+  get createModel() {
+
+    return {
+      id: 'id',
+      start: 'start rezewacji',
+      end: 'koniec rezerwacji',
+      room: 'wynajęte sale',
+      client_name: 'klient',
+      client_telephon: 'telefon',
+      client_email: 'email',
+      user_name: 'zmodyfikował',
+      description: 'opis',
+      price: 'cena'
+    };
+
   }
-  // openSchedule(nrRoom: number) {
-  //   this.dialog.open(AdminSheduleComponent, {
-  //     data: {nrRoom: nrRoom + 1},
-  //     width: '50%',
-  //   });
-  // }
+  // call mthod on "basic table" //////////////////////////////////////////////
+  dispatcherMethod(callConfig) {
+   this[callConfig.nameMethod](callConfig.row, callConfig.otherArgs);
+  }
+    // delete //
+    private delete(Row): void {
+      const dialogRef = this.dialog.open(DialogDeleteComponent, {
+        data: Row
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.appService.delete(Row.id).subscribe(
+            (deleted) => this.deletedRent(deleted),
+            (error) => this.deletedError(error)
+          );
+        }
+      });
+    }
+    private deletedRent(deleted) {
+      this.toastrService.success(`Rezerwacja o numerze ${deleted.id} została usunięta`);
+      this.refreshTable.refresh();
+    }
+    private deletedError(error) {
+      this.toastrService.error(`nie można usunąć rezerwacji`);
+      console.log(error);
+
+    }
+    // chenge status //
+    private changeStatus(row, status) {
+      row.status = status[0]['value'];
+      // add id_admin end  row send row to service
+      const bodyRequest = {
+        option: status[0],
+        rentRow: row
+      };
+      this.appService.changeStatus(bodyRequest, row['id']).subscribe(
+        (data) => this.changedStatus(data),
+        (error) => this.errorStatus(error),
+      );
+    }
+    private changedStatus(data) {
+     this.refreshTable.refresh();
+    }
+    private errorStatus(error) {
+      this.toastrService.error(`nie można zmienić statusu`);
+      console.log(error);
+    }
+    private logOut() {
+      this.LogOut.logOut();
+    }
 }

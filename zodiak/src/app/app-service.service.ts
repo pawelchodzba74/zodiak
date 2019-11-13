@@ -1,79 +1,72 @@
   import { Injectable } from '@angular/core';
   import { Observable } from 'rxjs/Observable';
-  import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-  import { DeviceDetectorService } from 'ngx-device-detector';
+  import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+  // import { DeviceDetectorService } from 'ngx-device-detector';
   import { HttpResponse } from '@angular/common/http';
   import { catchError } from 'rxjs/internal/operators/catchError';
   import { throwError } from 'rxjs';
   import { retry } from 'rxjs/internal/operators/retry';
-  import { ArrayType } from '@angular/compiler/src/output/output_ast';
+  // import { ArrayType } from '@angular/compiler/src/output/output_ast';
+  import { TokenService } from '../app/auth/token.service';
+  // import { DatePipe } from '@angular/common';
+  // import { formatDate } from '@angular/common';
 
   @Injectable({
     providedIn: 'root'
   })
   export class AppService {
-
-    ListContext;
-    httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/x-www-form-urlencoded; charset=UTF-8'
-      })
-    };
     constructor(
-      private http: HttpClient,
-      private divaceDetector: DeviceDetectorService
-      ) {}
+    private http: HttpClient,
+    // private divaceDetector: DeviceDetectorService,
+    private tokenService: TokenService
+    ) {}
+    url = 'http://localhost:8000/api/rent/';
+      // const prefixRoute = (this.detectBrowser() === 'chrome') ? '../../../' : '' ;
 
-    addPerson(person): Observable<any> {
-      const phpUrl = 'http://localhost/contact-new/back-end/create.php';
-      // const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
-      // const phpUrl = prefixRoute + 'back-end/create.php';
-      return  this.http.post(phpUrl, person)
+    create(rent) {
+      // !! must be better method//////////
+      rent.start = this.dateRequest(rent.start);
+      rent.end = this.dateRequest(rent.end);
+      return this.http.post(this.url, rent);
+    }
+    read() {
+      return this.http.get(this.url)
       .pipe(
+        retry(3),
         catchError(this.handleError)
       );
     }
-    read() {
-      const phpUrl = 'http://localhost/contact-new/back-end/read.php';
-      // const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
-      // const phpUrl = prefixRoute + 'back-end/read.php';
-      return this.http.get(phpUrl)
-        .pipe(
-          retry(3),
-          catchError(this.handleError));
-    }
-    getPerson(id: string): Observable<any> {
-      const phpUrl = 'http://localhost/contact-new/back-end/read_one.php?id=' + id;
-      // const prefixRoute = (this.detectBrowser() === 'chrome') ? '../../../' : '' ;
-      // const phpUrl = prefixRoute + 'back-end/read_one.php?id=' + id;
-      return this.http.get(phpUrl)
+    show(id: string) {
+      return this.http.get(this.url + id)
         .pipe(
           retry(3),
           catchError(this.handleError)
-        );
+      );
     }
-    // tslint:disable-next-line:max-line-length
-    upDataPerson(person): Observable<object> {
-  /////////////////////////////////////////////////////// set data time //////////////////////
-      // person.dateDo = person.dateDo.setHours(person.hoursDo.split(':')[0], person.hoursDo.split(':')[1]) ;
-      ///////////////////////////////////////////////////////////////////////////
-      const phpUrl = 'http://localhost/contact-new/back-end/update.php';
-      // const prefixRoute = (this.detectBrowser() === 'chrome') ? '../../../' : '' ;
-      // const phpUrl = prefixRoute + 'back-end/update.php';
-      return this.http.post(phpUrl, person, this.httpOptions)
+    upData(rent, id): Observable<object> {
+      rent.start = this.dateRequest(rent.start);
+      rent.end = this.dateRequest(rent.end);
+      return this.http.put(this.url + id, rent)
         .pipe(
+          retry(3),
           catchError(this.handleError)
-        );
-  }
-    deletePerson(person): Observable<object> {
-      const phpUrl = 'http://localhost/contact-new/back-end/delete.php';
-      // const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
-      // const phpUrl = prefixRoute + 'back-end/delete.php';
-      return this.http.post(phpUrl, {id: person.id}, this.httpOptions)
-        .pipe(
-          catchError(this.handleError)
-        );
+      );
     }
+    delete(id) {
+      return this.http.delete(this.url  + id)
+        .pipe(
+          retry(3),
+          catchError(this.handleError)
+      );
+    }
+    eventsFromClients(room) {
+      return this.http.get(this.url + 'event/' + room);
+    }
+    changeStatus(status, id) {
+      return this.http.put(this.url + 'status/' + id, status);
+    }
+
+
     private handleError(error: HttpErrorResponse) {
       if (error.error instanceof ErrorEvent) {
         // A client-side or network error occurred. Handle it accordingly.
@@ -86,198 +79,22 @@
           `body was: ${error.error}`);
       }
       // return an observable with a user-facing error message
-      return throwError(
-        'NIe można wczytać danych skontaktuj się z administratorem');
-    }
-    fowardRefTab(ListContext): void {
-      this.ListContext = ListContext;
-    }
-    reLoadTab(): void {
-      this.ListContext.refreshPage();
-    }
-    detectBrowser(): string  {
-      return this.divaceDetector.browser;
-    }
-    ///////////////////////////////////////////// zodiak service///////////////
-
-    getEvents(nrRoom: number) {//this.fabrickMock();
-      return new Promise((resolve, reject) => {
-        // let EVENTS = this.fabrickMock();
-        let EVENTS = this.mockEvents();
-       let eResult = [];
-        eResult = EVENTS.filter((e) => +e['nrRoom'] === nrRoom);
-         eResult.length ? resolve(eResult) : reject();
-      });
+      return throwError(error);
     }
 
-    fabrickMock() {
-
-    const date = new Date();
-    const title = 'treć xxx ';
-    const isAllDay = false;
-    const nrRoom = [1,2,3,4,6,6];
-
-    const maineObj = [];
-    const one = {
-      start: '',
-      end: '',
-      title: '',
-      isAllDay: '',
-      nrRoom: ''
-    };
-
-    for (let i = 0; i <= 10; i++) {
-      maineObj.push(one);
-    }
-    console.log(maineObj);
-  return maineObj;
+    // detectBrowser(): string  {
+    //   return this.divaceDetector.browser;
+    // }
+    //////////////////////////////////////// date ////////////////////////////////////////////
+    private dateRequest(d) {
+      if (d instanceof Date) {
+        // tslint:disable-next-line:max-line-length
+           return `${d.getFullYear()}-${this.addZero(d.getUTCMonth())}-${this.addZero(d.getDate())} ${this.addZero(d.getHours())}:${this.addZero(d.getMinutes())}:${this.addZero(d.getSeconds())}`;
+      }
+      return  d;
 
     }
-
-
-    mockEvents() { //this.fabrickMock();
-
-        return[
-        { id: 1,
-      start: new Date('2019-03-19T09:00:00'),
-      end: new Date('2019-03-12T19:30:00'),
-      title: '11 NOVA - pisać pierwsze nazwę firmy wynajmującej będzie wtety dobrze widać w tygodniowym ujęciu',
-      isAllDay: true,
-      nrRoom: '1'
-      },
-      {
-      id: 2,
-      start: new Date('2019-03-19T11:00:00'),
-      end: new Date('2019-03-19T12:30:00'),
-      title: '2222222222222',
-      isAllDay: false,
-      nrRoom: '1'
-      },
-      {
-      id: 3,
-      start: new Date('2019-03-19T09:00:00'),
-      end: new Date('2019-03-19T11:30:00'),
-      title: '333333333333333333333',
-      isAllDay: false,
-      nrRoom: '1'
-      },
-      { id: 1,
-        start: new Date('2019-03-19T09:00:00'),
-        end: new Date('2019-03-19T11:30:00'),
-        title: '11 NOVA - pisać pierwsze nazwę firmy wynajmującej będzie wtety dobrze widać w tygodniowym ujęciu',
-        isAllDay: true,
-        nrRoom: '2'
-        },
-        {
-        id: 2,
-        start: new Date('2019-03-19T11:00:00'),
-        end: new Date('2019-03-19T12:30:00'),
-        title: '2222222222222',
-        isAllDay: false,
-        nrRoom: '2'
-        },
-        {
-        id: 3,
-        start: new Date('2019-03-19T09:00:00'),
-        end: new Date('2019-03-19T11:30:00'),
-        title: '333333333333333333333',
-        isAllDay: false,
-        nrRoom: '2'
-        },
-        { id: 1,
-          start: new Date('2019-03-19T09:00:00'),
-          end: new Date('2019-03-19T11:30:00'),
-          title: '11 NOVA - pisać pierwsze nazwę firmy wynajmującej będzie wtety dobrze widać w tygodniowym ujęciu',
-          isAllDay: true,
-          nrRoom: '3'
-          },
-          {
-          id: 2,
-          start: new Date('2019-03-19T11:00:00'),
-          end: new Date('2019-03-19T12:30:00'),
-          title: '2222222222222',
-          isAllDay: false,
-          nrRoom: '3'
-          },
-          {
-          id: 3,
-          start: new Date('2019-03-19T09:00:00'),
-          end: new Date('2019-03-19T11:30:00'),
-          title: '333333333333333333333',
-          isAllDay: false,
-          nrRoom: '3'
-          },
-          { id: 1,
-            start: new Date('2019-03-19T09:00:00'),
-            end: new Date('2019-03-19T11:30:00'),
-            title: '11 NOVA - pisać pierwsze nazwę firmy wynajmującej będzie wtety dobrze widać w tygodniowym ujęciu',
-            isAllDay: true,
-            nrRoom: '4'
-            },
-            {
-            id: 2,
-            start: new Date('2019-03-19T11:00:00'),
-            end: new Date('2019-03-19T12:30:00'),
-            title: '2222222222222',
-            isAllDay: false,
-            nrRoom: '4'
-            },
-            {
-            id: 3,
-            start: new Date('2019-03-19T09:00:00'),
-            end: new Date('2019-03-19T11:30:00'),
-            title: '333333333333333333333',
-            isAllDay: false,
-            nrRoom: '4'
-            },
-            { id: 1,
-              start: new Date('2019-03-19T09:00:00'),
-              end: new Date('2019-03-19T11:30:00'),
-              title: '11 NOVA - pisać pierwsze nazwę firmy wynajmującej będzie wtety dobrze widać w tygodniowym ujęciu',
-              isAllDay: true,
-              nrRoom: '5'
-              },
-              {
-              id: 2,
-              start: new Date('2019-03-19T11:00:00'),
-              end: new Date('2019-03-19T12:30:00'),
-              title: '2222222222222',
-              isAllDay: false,
-              nrRoom: '5'
-              },
-              {
-              id: 3,
-              start: new Date('2019-03-19T09:00:00'),
-              end: new Date('2019-03-19T11:30:00'),
-              title: '333333333333333333333',
-              isAllDay: false,
-              nrRoom: '5'
-              },
-              { id: 1,
-                start: new Date('2019-03-19T09:00:00'),
-                end: new Date('2019-03-19T11:30:00'),
-                title: '11 NOVA - pisać pierwsze nazwę firmy wynajmującej będzie wtety dobrze widać w tygodniowym ujęciu',
-                isAllDay: true,
-                nrRoom: '6'
-                },
-                {
-                id: 2,
-                start: new Date('2019-03-19T11:00:00'),
-                end: new Date('2019-03-19T12:30:00'),
-                title: '2222222222222',
-                isAllDay: false,
-                nrRoom: '6'
-                },
-                {
-                id: 3,
-                start: new Date('2019-03-19T09:00:00'),
-                end: new Date('2019-03-19T11:30:00'),
-                title: '333333333333333333333',
-                isAllDay: false,
-                nrRoom: '6'
-                },
-
-
-      ] ;
+    private addZero(d) {
+      return d < 10 ? '0' + d : d;
     }
   }

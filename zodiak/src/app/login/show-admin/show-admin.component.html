@@ -1,0 +1,13 @@
+<app-table-basic
+              [ModelMaterialTable] = 'ModelFromPerson'
+              [service] = 'authService'
+              (calledMethod) = 'dispatcherMethod($event)'
+><div tools class = "tools">
+    <button  mat-raised-button (click) = "newAdmin()">nowy administrator</button>
+    <a  mat-raised-button [routerLink] = '["/clients"]' > lista rezerwacji </a>
+    <div>
+      <app-log-out #LogOut></app-log-out>
+    </div>
+  </div>
+</app-table-basic>
+

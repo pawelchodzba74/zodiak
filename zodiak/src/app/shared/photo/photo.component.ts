@@ -25,19 +25,19 @@ export class PhotoComponent implements OnInit {
     this.loadPhoto();
   }
   loadPhoto(): void {
-    const spiner = this.spinerComponent.show(this.spiner);
-    const id = this.route.snapshot.params['id'];
-    this.appService.getPerson(id).subscribe((person) => {
-      this.photo = person.photo;
-      spiner.destroy();
-    },
-      (error) => {
-        this.rout.navigate(['/', 'clients']);
-        this.toastr.error(error, ' Bład');
-        spiner.destroy();
+    // const spiner = this.spinerComponent.show(this.spiner);
+    // const id = this.route.snapshot.params['id'];
+    // this.appService.getPerson(id).subscribe((person) => {
+    //   this.photo = person.photo;
+    //   spiner.destroy();
+    // },
+    //   (error) => {
+    //     this.rout.navigate(['/', 'clients']);
+    //     this.toastr.error(error, ' Bład');
+    //     spiner.destroy();
 
-      }
-    );
+    //   }
+    // );
   }
 
 }

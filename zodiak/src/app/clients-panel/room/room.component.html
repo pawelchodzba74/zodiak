@@ -1,10 +1,15 @@
-<div                                              >
-  <app-btn-schedule
-                      [nrRooms] = "[id]"
-                      [admin] = "true"
-  ></app-btn-schedule>
+<div class = "d-flex flex-column justify-content-around" style="height: 100%">
+  <div class = "d-flex justify-content-around">
+    <app-btn-schedule
+                        [nrRooms] = "[dataItem.id]"
+                        [admin] = "false"
+    ></app-btn-schedule>
+    <button (click) = "booking([dataItem.id])"><span>wynajmnij sale: </span>{{[dataItem.id][0]}}</button>
+  </div>
+  <p>
+    {{description}}
+  </p>
 
-  <button (click) = "booking([id])"><span>wynjmnij sale: </span>{{[id][0]}}</button>
-
-  <app-scroll-view></app-scroll-view>
 </div>
+
+

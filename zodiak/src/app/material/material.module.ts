@@ -30,6 +30,7 @@ import {
 } from '@angular/material';
 const MAT_DIALOG_GLOBAL_CONFIG: MatDialogConfig = {
   width: '600px',
+
   // height: '700px',
   disableClose: true,
   hasBackdrop: true

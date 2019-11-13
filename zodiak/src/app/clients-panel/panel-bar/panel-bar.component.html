@@ -1,11 +1,12 @@
 
 <kendo-panelbar
+              (stateChange)="onPanelChange($event)"
               [expandMode]="expandMode"
-              [height]="height + '%'"
+              [height]="height + 'px'"
               [items]="items"
   ><ng-template kendoPanelBarItemTemplate let-dataItem>
     <app-room
-              [id]="dataItem.id"
+              [dataItem]="dataItem"
     ></app-room>
   </ng-template>
 </kendo-panelbar>

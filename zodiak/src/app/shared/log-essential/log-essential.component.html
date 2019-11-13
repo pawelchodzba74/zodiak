@@ -1,0 +1,37 @@
+  <input
+    [(ngModel)] = "IDs.name"
+    #login = "ngModel"
+    name ="login"
+    type="text"
+    id="inputEmail"
+    class="form-control"
+    placeholder="name"
+    required minlength="3" maxlength="255"
+    >
+    <div *ngIf ="login.invalid && (login.dirty || login.touched)">
+      <div *ngIf ="login.errors.required">pole jest wymagane</div>
+      <div *ngIf ="login.errors.minlength">minimalna liczba znaków 3</div>
+      <div *ngIf ="login.errors.maxlength">maxymalna liczba znaków 255</div>
+    </div>
+
+
+  <input
+   [(ngModel)] = "IDs.password"
+   #password = "ngModel"
+   name ="password"
+   type="password"
+   id="inputPassword"
+   class="form-control"
+   placeholder="password"
+   required minlength="6" maxlength="255"
+
+   >
+   <div *ngIf ="password.invalid && (password.dirty || password.touched)">
+    <div *ngIf ="password.errors.required">pole jest wymagane</div>
+    <div *ngIf ="password.errors.minlength">minimalna liczba znaków 6</div>
+    <div *ngIf ="password.errors.maxlength">maxymalna liczba znaków 255</div>
+  </div>
+
+  <ng-content select="[edit]"></ng-content>
+  <button  (click)= "send()" class="btn btn-lg btn-primary btn-block btn-signin" type="submit" [disabled] = '!(login.valid && password.valid)'>dodaj</button>
+  <button mat-button mat-dialog-close>Anuluj</button>

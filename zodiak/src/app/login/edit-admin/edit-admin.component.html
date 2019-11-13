@@ -1,0 +1,38 @@
+
+<mat-dialog-content class="mat-typography">
+  <app-log-essential [credential] = 'credential' [personOnTable] = 'personOnTable'>
+    <div edit>
+      <!-- <ng-content select="[confirmPassword]" [confirm] = "confirm"></ng-content> -->
+        <input *ngIf=  "confirmFile" [(ngModel)] = "credential.confirm" name ="email" type="password" id="inputEmail" class="form-control" placeholder="potwierdź hasło">
+        <input
+          [(ngModel)] = "credential.email"
+          #email = "ngModel"
+          name ="email"
+          type="text"
+          id="inputEmail"
+          class="form-control"
+          placeholder="email"
+          email
+          >
+          <div *ngIf ="email.invalid && (email.dirty || email.touched)">
+            <div *ngIf ="email.errors.email">email musi mieć odpowiedni format</div>
+          </div>
+
+        <input
+          [(ngModel)] = "credential.telephon"
+          #telephon = "ngModel"
+          name ="telephon"
+          type="text"
+          id="inputtelephon"
+          class="form-control"
+          placeholder="telefon"
+          pattern = "[0-9]{9,9}"
+          required
+          >
+          <div *ngIf ="telephon.invalid && (telephon.dirty || telephon.touched)">
+            <div *ngIf ="telephon.errors.pattern">telefon musi mieć 9 liczb</div>
+            <div *ngIf ="telephon.errors.required">pole jest wymagane</div>
+          </div>
+      </div>
+    </app-log-essential>
+</mat-dialog-content>

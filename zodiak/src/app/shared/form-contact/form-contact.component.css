@@ -1,0 +1,9 @@
+.head-center{
+  display: flex;
+  justify-content: center;
+}
+.one-row {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}

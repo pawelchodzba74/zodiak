@@ -15,7 +15,9 @@ export class DayBoundToTimeComponent implements OnInit {
   };
 
   @Output() dateReady: EventEmitter<any> = new EventEmitter();
+  // @Output() everyEvent: EventEmitter<any> = new EventEmitter();
   @Input() disabled: boolean;
+  @Input() startEdit: boolean;
   @Input() placeholderDate: string;
   @Input() placeholderTime: string;
   @ViewChild('datepicker') datePicker;
@@ -26,7 +28,7 @@ export class DayBoundToTimeComponent implements OnInit {
   ngOnInit() {
   this.setPlaceholder();
   }
-// main sequence event /////////////////////////////////////////////////////
+  // main sequence event /////////////////////////////////////////////////////
   glueDateTime(date) {
     if (date instanceof Date) {
       this.assignTime(date, this.time);
@@ -36,37 +38,59 @@ export class DayBoundToTimeComponent implements OnInit {
       this.eventTime = true;
     }
 
-
     this.fowardIsEventsRedy();
   }
   assignTime(Date, time) {
-
     this.Date = Object.assign(
       Date,
       Date.setHours(time.hours),
       Date.setMinutes(time.minutes),
     );
     this.time = time === this.time ? this.time : time ;
-
-
   }
   fowardIsEventsRedy() {
     return  this.eventDate && this.eventTime ?  this.dateReady.emit(this.Date) : null;
   }
-// disabled /////////////////////////////////////////////////////////////////////
+  // disabled /////////////////////////////////////////////////////////////////////
   // end //
   disabledShow() {
     this.datePicker.chengeDisabled(false);
     this.timePicker.chengeDisabled(false);
   }
-// set min max /////////////////////////////////////////////////////////////////
+  // set min max /////////////////////////////////////////////////////////////////
   // srart & end //
   minMaxDefault(minMaxDefault) {
     this.datePicker.setDefaultMinMax(minMaxDefault);
   }
-// placeholder ///////////////////////////////////////////////////////////////
+  // placeholder ///////////////////////////////////////////////////////////////
   setPlaceholder() {
     this.timePicker.setPlaceholder(this.placeholderTime);
     this.datePicker.setPlaceholder(this.placeholderDate);
+  }
+  // edit /////////////////////////////////////////////////////////////////////////
+  endDateEdit(end) {
+    const date = this.fowardDate(end);
+    this.Date = date;
+  }
+  startDateEdit(start) {
+    const date =  this.fowardDate(start);
+    this.Date = date;
+  }
+  private fowardDate(dateStr) {
+    const date = new Date(dateStr);
+    this.datePicker.setDefaultDate(date);
+    this.timePicker.setDefaultDate(date);
+    this.everyEvents();
+    return date;
+  }
+  private everyEvents() {
+    this.eventDate = true;
+    this.eventTime = true;
+  }
+  chengeDefaultTime(date) {
+    this.time = {
+      hours: date.getHours(),
+      minutes: date.getMinutes()
+    };
   }
 }

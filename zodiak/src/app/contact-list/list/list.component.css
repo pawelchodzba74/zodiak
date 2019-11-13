@@ -1,32 +1,16 @@
-
-.ghost-top{
-  height: 100px;
-}
-table {
-  width: 100%;
-}
-.mat-form-field {
-  font-size: 12px;
-  width: 100%;
-}
-  td, th {
-    width: 25%;
+@media(max-width:890px){
+  app-btn-schedule{
+  display: none;
   }
-  tr:nth-child(even){
-    background-color: rgb(230, 227, 217);
-  }
-    .into-cell{
-      padding-left: 35px;
-      padding-right: 15px;
-    }
-.footer-tabs{
+}
+.tools{
+  height:100%;
   width: 100%;
   display: flex;
-  justify-content: space-around;
-  background-color: white;
-  z-index: 0;
-}
-mat-icon{
-  cursor: pointer;
-}
+  justify-content: space-between;
+  align-items: center;
 
+}
+.tools>app-btn-schedule{
+  width: 40%;
+}

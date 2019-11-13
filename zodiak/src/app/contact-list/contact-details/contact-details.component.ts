@@ -24,16 +24,16 @@ export class ContactDetailsComponent implements OnInit {
     this.loadContact();
   }
   loadContact(): void {
-    const spiner = this.spinerComponent.show(this.spiner);
-    const id = this.route.snapshot.params['id'];
-    this.appService.getPerson(id).subscribe((person) => {
-      this.Person = person;
-      spiner.destroy();
-    },
-      (error) => {
-        this.toastr.error(error, ' Bład');
-        spiner.destroy();
-      }
-    );
+    // const spiner = this.spinerComponent.show(this.spiner);
+    // const id = this.route.snapshot.params['id'];
+    // this.appService.getPerson(id).subscribe((person) => {
+    //   this.Person = person;
+    //   spiner.destroy();
+    // },
+    //   (error) => {
+    //     this.toastr.error(error, ' Bład');
+    //     spiner.destroy();
+    //   }
+    // );
   }
 }

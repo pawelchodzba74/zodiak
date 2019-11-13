@@ -2,20 +2,31 @@
 <app-form-contact
                 #formContact
                 [data]= "data"
+                (validForm) = "setStateValidity($event)"
 ></app-form-contact>
 <app-start-end-event #startEndEvent
 [minDayDefault]='0'
-[maxDayDefault]='6'
+[maxDayDefault]='365'
 (date) = "setStartEnd($event)"
 ></app-start-end-event>
 <div class="content-form">
     <mat-dialog-actions>
       <div class="row">
+          <!-- <pre>form {{ formContact.form.invalid | json }}</pre> -->
         <div class="col">
           <button mat-raised-button mat-dialog-close>Anuluj</button>
-          <button mat-raised-button color = "primary" [disabled] = "formContact.form.invalid" mat-dialog-close>Dodaj</button>
+          <button mat-raised-button  (click)="addReservations(formContact.form.value)" color = "primary" [disabled] = "setDisabled()" mat-dialog-close>Dodaj</button>
+          <!-- <button mat-raised-button  (click)="addReservations(formContact.form.value)" color = "primary" [disabled] = "disabled" mat-dialog-close>Dodaj</button> -->
         </div>
       </div>
     </mat-dialog-actions>
   </div>
+  <!-- <pre>form {{ formContact.form.value | json }}</pre> -->
+  <!-- <pre>form {{ formContact.form.errors | json }}</pre> -->
+   <!-- <pre>start {{ formContact.form.get('start').valid | json }}</pre>
+  <pre>end {{ formContact.form.get('end').valid | json }}</pre> -->
+  <!-- <pre>name {{ formContact.form.get('name').valid | json }}</pre>
+  <pre>telphon {{ formContact.form.get('telephon').valid | json }}</pre>
+  <pre> room {{ formContact.form.get('room').valid | json }}</pre>
+  <pre> email {{ formContact.form.get('email').valid | json }}</pre> -->
 

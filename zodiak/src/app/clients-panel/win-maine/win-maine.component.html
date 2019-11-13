@@ -1,4 +1,31 @@
-<div class="d-flex">
-  <app-panel-bar #panelBar  class = "bg-primary"></app-panel-bar>
-  <app-schema  (trigerRoom) = 'trigerRoom($event)' class = "bg-secondary"></app-schema>
+<div cllas = "all">
+<app-sky></app-sky>
+<div class="maine">
+  <div class="content">
+        <div *ngIf = "isLoged; then logOut else loggingIn"></div>
+        <div class = "head">
+          <ng-template #logOut>
+            <div class = "log">
+              <app-log-out></app-log-out>
+              <a style ="opacity:0.5" mat-raised-button [routerLink]="['/clients']">Lista rezerwacji</a>
+            </div>
+          </ng-template>
+          <ng-template #loggingIn>
+            <div class = "log">
+              <button style ="opacity:0.5"  mat-raised-button (click)='openDialog()'>Zaloguj</button>
+            </div>
+          </ng-template>
+        </div>
+        <app-schema class = "schema"></app-schema>
+        <!-- <app-panel-bar class = "panel-bar"></app-panel-bar> -->
+        <div class = "schedule">
+          <div  class = "btn-schedule">
+            <div class = "title-schedule">Sprawdź dostępnosć sal</div>
+            <div> <app-btn-schedule  [nrRooms] = "[1,2,3,4,5,6]"></app-btn-schedule></div>
+          </div>
+
+        </div>
+  </div>
+  <div class = "zodiak"></div>
+</div>
 </div>

@@ -1,19 +1,33 @@
 <ng-template #spiner></ng-template>
 <div  class = "transparent">
   <div class="content">
-      <app-form-contact #formContact [Person]="Person" ></app-form-contact>
-      <div>
-          <app-start-end-event #startEndEvent
-                          [minDayDefault]='false'
-                          [maxDayDefault]='365'
-                          (date) = "setStartEnd($event)"
-        ></app-start-end-event>
-        <button mat-raised-button [routerLink] = "['']">Anuluj</button>
-        <button [routerLink] = "['']" (click)="updateContact()" mat-raised-button color = "primary" [disabled] = "formContact.form.invalid" >Dodaj</button>
-      </div>
+    <app-form-contact #formContact></app-form-contact>
+    <div>
+      <app-start-end-event #startEndEvent
+                        [minDayDefault]='false'
+                        [maxDayDefault]='365'
+                        (date) = "setStartEnd($event)"
+      ></app-start-end-event>
+    </div>
+    <div class = "price">
+      <input  matInput [(ngModel)] = "price" type="number" (input) = 'currentPrice()' placeholder="cena">zł.
+    </div>
+      <!-- <input matInput formControlName="telephon" placeholder="numer telefonu"> -->
+    <div>
+      <button mat-raised-button [routerLink] = "['/clients']">Anuluj</button>
+      <button [routerLink] = "['/clients']" (click)="updateContact()" mat-raised-button color = "primary" [disabled] = "formContact.form.invalid" >Aktualizuj</button>
+    </div>
+
   </div>
-
-
 </div>
-
+<!--
+<pre>form {{ formContact.form.value | json }}</pre>
+<pre>form {{ formContact.form.valid | json }}</pre> -->
+<!-- <pre>form {{ formContact.form.errors | json }}</pre> -->
+<!-- <pre>start {{ formContact.form.get('start').valid | json }}</pre> -->
+<!-- <pre>end {{ formContact.form.get('end').valid | json }}</pre>
+<pre>name {{ formContact.form.get('name').valid | json }}</pre> -->
+<!-- <pre>telphon {{ formContact.form.get('telephon').valid | json }}</pre> -->
+<!-- <pre> room {{ formContact.form.get('room').valid | json }}</pre> -->
+<!-- <pre> email {{ formContact.form.get('email').valid | json }}</pre> -->
 

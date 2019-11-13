@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule, LOCALE_ID, ErrorHandler } from '@angular/core';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,6 +15,7 @@ import { ScrollDispatchModule} from '@angular/cdk/scrolling';
 import { SpinerComponent } from './shared/spiner/spiner.component';
 import { LoginModule } from './login/login.module';
 import { AuthService } from './auth/auth.service';
+import { TokenService } from './auth/token.service';
 import { LayoutService } from './shared/services/layout.service';
 import { AmazingTimePickerModule } from 'amazing-time-picker';
 import '@progress/kendo-angular-intl/locales/pl/all';
@@ -24,15 +25,24 @@ import { ClientsPanelModule } from './clients-panel/clients-panel.module';
 import { AppService } from './app-service.service';
 // import { LayoutModule } from '@progress/kendo-angular-layout';
 import { PanelBarModule } from '@progress/kendo-angular-layout';
-import { ScrollViewModule } from '@progress/kendo-angular-scrollview';
+import { AuthGuard } from './auth/auth.guard';
+import { GlobalErrorHandler } from './core/global-error-handler';
+import { RentBrodecastService } from './shared/services/rent-brodecast.service';
+import { DataSourceTableService } from './shared/services/data-source-table.service';
 
+// import { ScrollViewModule } from '@progress/kendo-angular-scrollview';
+
+// import { AgmCoreModule } from '@agm/core';
 
 // import { BehaviorSubject } from 'rxjs';
 
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './token-interceptor';
 @NgModule({
   declarations: [
     AppComponent
+
+
   ],
   imports: [
     BrowserModule,
@@ -50,18 +60,30 @@ import { ScrollViewModule } from '@progress/kendo-angular-scrollview';
     DateInputsModule,
     LabelModule,
     ClientsPanelModule,
-    PanelBarModule,
-    ScrollViewModule
+    PanelBarModule
+    // AgmCoreModule.forRoot({
+      // apiKey: 'AIzaSyCfVuTpUBK6UMvaVSbB2NHO5v3JZcVfkc4'})
     // SchedulerModule
 
 
   ],
   providers: [
+    // {provide: ErrorHandler, useClass: GlobalErrorHandler},
     SpinerComponent,
+    RentBrodecastService,
+    DataSourceTableService,
     AuthService,
+    TokenService,
     LayoutService,
     AppService,
-    {provide: LOCALE_ID, useValue: 'pl'}
+    AuthGuard,
+    {provide: LOCALE_ID, useValue: 'pl'},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+
   ],
   bootstrap: [AppComponent]
 })

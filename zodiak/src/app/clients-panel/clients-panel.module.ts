@@ -10,8 +10,14 @@ import { MaterialModule } from '../material/material.module';
 import { ClientScheduleComponent } from './client-schedule/client-schedule.component';
 import { PanelBarComponent } from './panel-bar/panel-bar.component';
 import { PanelBarModule } from '@progress/kendo-angular-layout';
-import { ScrollViewComponent } from './scroll-view/scroll-view.component';
-import { ScrollViewModule } from '@progress/kendo-angular-scrollview';
+// import { ScrollViewComponent } from './scroll-view/scroll-view.component';
+// import { ScrollViewModule } from '@progress/kendo-angular-scrollview';
+import { RoomService } from '../clients-panel/room.service';
+import { LoginModule } from '../login/login.module';
+import { SkyComponent } from './sky/sky.component';
+
+// import { MapComponent } from './map/map.component';
+// import { AgmCoreModule } from '@agm/core';
 // import { PanelBarItemModel } from '@progress/kendo-angular-layout';
 @NgModule({
   declarations: [
@@ -21,7 +27,12 @@ import { ScrollViewModule } from '@progress/kendo-angular-scrollview';
     BookingFormComponent,
     ClientScheduleComponent,
     PanelBarComponent,
-    ScrollViewComponent
+    SkyComponent
+
+    // ScrollViewComponent,
+    // MapComponent
+
+    // AgmCoreModule
   ],
   imports: [
     CommonModule,
@@ -29,19 +40,24 @@ import { ScrollViewModule } from '@progress/kendo-angular-scrollview';
     RouterModule,
     MaterialModule,
     PanelBarModule,
-    ScrollViewModule
+    LoginModule
+    // ScrollViewModule
+    // AgmCoreModule.forRoot({
+    //   apiKey: 'AIzaSyCfVuTpUBK6UMvaVSbB2NHO5v3JZcVfkc4'})
 
 
   ],
-  entryComponents: [BookingFormComponent],
+  entryComponents: [BookingFormComponent, ClientScheduleComponent],
   exports: [
     SchemaComponent,
     WinMaineComponent,
     RoomComponent,
-    ClientScheduleComponent,
+    // ClientScheduleComponent,
     PanelBarComponent,
-    ScrollViewComponent
-
-  ]
+    // ScrollViewComponent,
+    // MapComponent
+    SkyComponent
+  ],
+  providers: [RoomService]
 })
 export class ClientsPanelModule { }

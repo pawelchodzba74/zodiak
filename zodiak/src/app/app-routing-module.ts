@@ -6,19 +6,29 @@ import { ContactDetailsComponent } from './contact-list/contact-details/contact-
 import { EditContactComponent } from './contact-list/edit-contact/edit-contact.component';
 import { PhotoComponent } from './shared/photo/photo.component';
 import { WinMaineComponent } from './clients-panel/win-maine/win-maine.component';
+import { ShowAdminComponent } from './login/show-admin/show-admin.component';
+import { AddAdminComponent } from './login/add-admin/add-admin.component';
+import { EditAdminComponent } from './login/edit-admin/edit-admin.component';
 import { RoomComponent } from './clients-panel/room/room.component';
+import { AuthGuard } from './auth/auth.guard';
+import { ErrorComponent } from './core/error/error.component';
 
 export const APP_ROUTES: Route[] = [
-  { path: '', redirectTo: 'clients', pathMatch: 'full' },
+  { path: '', redirectTo: 'room', pathMatch: 'full' },
   { path: 'clients' , component: <any>ListComponent, children: [
       { path: 'details/:id', component: <any>ContactDetailsComponent},
       { path: 'edit/:id', component: <any>EditContactComponent},
-  ]},
-  { path: 'room', component: <any>WinMaineComponent, children: [
-    {path: 'room/:id', component: <any> RoomComponent }
-  ] },
+  ]}, // canActivate: [AuthGuard]},
+  {path: 'room', component: <any>WinMaineComponent },
+  {path: 'admins', component: <any>ShowAdminComponent, children: [
+    {path: 'edit/:id', component: <any> EditAdminComponent}
+  ] // canActivate: [AuthGuard]
+  },
 
-  { path: 'clients/photo/:id', component: <any>PhotoComponent },
+  // {path: 'error', component: <any>ErrorComponent },
+
+
+  // { path: 'clients/photo/:id', component: <any>PhotoComponent },
 
 
 ];
